@@ -1,0 +1,9 @@
+# Not needed at runtime; keeps the deployment small
+_archived-hero-prototype
+tests
+scripts
+public/images/*.zip
+public/images/breakfast-hero.png
+public/images/concepts
+*.md
+.env*
