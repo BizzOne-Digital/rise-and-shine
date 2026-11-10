@@ -42,17 +42,17 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 bg-cream">
+    <header className="sticky top-0 z-50 bg-black text-white">
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-md focus:bg-char focus:px-4 focus:py-2 focus:text-cream">
         Skip to content
       </a>
-      <div className="mx-auto flex h-[72px] max-w-[1800px] items-center justify-between gap-6 pr-[4.5%] pl-0 lg:h-[84px]">
+      <div className="mx-auto flex h-[72px] max-w-[1800px] items-center justify-between gap-6 pr-[4.5%] pl-[2%] lg:h-[84px]">
         <Link href="/" aria-label="Rise N’ Shine Breakfast Place, home" className="shrink-0"><Logo plain /></Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-8 font-nav text-[0.95rem] uppercase tracking-wide lg:flex xl:gap-12">
+        <nav aria-label="Main" className="hidden items-center gap-8 font-nav text-[0.95rem] font-bold uppercase tracking-wide lg:flex xl:gap-12">
           {DESKTOP.map((n) => (
             <Link key={n.href} href={n.href} aria-current={pathname === n.href ? "page" : undefined}
-              className="group relative py-3 font-medium text-char">
+              className="group relative py-3 font-bold text-white">
               {n.label}
               <span className="absolute bottom-1 left-0 h-0.5 w-0 bg-sun transition-[width] duration-300 group-hover:w-full group-aria-[current=page]:w-full" />
             </Link>
@@ -64,11 +64,11 @@ export function Header() {
         </Link>
 
         <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-controls="mobile-nav"
-          className="min-touch inline-flex items-center gap-2 rounded-md border border-char px-4 font-serif2 text-sm font-semibold lg:hidden">
+          className="min-touch inline-flex items-center gap-2 rounded-md border border-white px-4 font-serif2 text-sm font-semibold text-white lg:hidden">
           <span>{open ? "Close" : "Menu"}</span>
           <span aria-hidden className="relative block h-3 w-5">
-            <motion.span className="absolute left-0 top-0 block h-0.5 w-5 bg-char" animate={open ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }} />
-            <motion.span className="absolute left-0 top-[10px] block h-0.5 w-5 bg-char" animate={open ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }} />
+            <motion.span className="absolute left-0 top-0 block h-0.5 w-5 bg-white" animate={open ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }} />
+            <motion.span className="absolute left-0 top-[10px] block h-0.5 w-5 bg-white" animate={open ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }} />
           </span>
         </button>
       </div>
