@@ -59,7 +59,7 @@ export function Header() {
           ))}
         </nav>
 
-        <Link href="/book" className="btn-press group hidden items-center gap-4 rounded-md bg-sun px-6 py-3 font-nav text-[0.95rem] font-semibold text-white transition-colors hover:bg-sun-red lg:inline-flex">
+        <Link href="/book" className="btn-press group hidden items-center gap-4 rounded-md bg-[#E6A900] px-6 py-3 font-nav text-[0.95rem] font-bold text-char transition-colors hover:bg-[#CF9500] lg:inline-flex">
           Let’s do breakfast <Arrow className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </Link>
 
