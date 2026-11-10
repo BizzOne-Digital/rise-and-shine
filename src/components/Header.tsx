@@ -47,7 +47,7 @@ export function Header() {
         Skip to content
       </a>
       <div className="mx-auto flex h-[72px] max-w-[1800px] items-center justify-between gap-6 px-[4.5%] lg:h-[76px]">
-        <Link href="/" aria-label="Rise N’ Shine Breakfast Place, home" className="shrink-0"><Logo /></Link>
+        <Link href="/" aria-label="Rise N’ Shine Breakfast Place, home" className="shrink-0"><Logo plain /></Link>
 
         <nav aria-label="Main" className="hidden items-center gap-8 font-nav text-[0.95rem] uppercase tracking-wide lg:flex xl:gap-12">
           {DESKTOP.map((n) => (

@@ -45,7 +45,7 @@ export type SeedLocation = {
 export const LOCATIONS: SeedLocation[] = [
   {
     slug: "forest-lawn", name: "Forest Lawn", street: "2014 36 ST SE", city: "Calgary", region: "AB", postalCode: "T2B 0X8",
-    phone: "4032716517", email: BUSINESS.email, order: 1, weekly: generalWeekly, overrides: [], hoursConfirmed: false,
+    phone: "4032715170", email: BUSINESS.email, order: 1, weekly: generalWeekly, overrides: [], hoursConfirmed: false,
   },
   {
     slug: "the-district", name: "The District", street: "Unit 120 - 11064 14 ST NE", city: "Calgary", region: "AB", postalCode: "T3K 0Z8",
