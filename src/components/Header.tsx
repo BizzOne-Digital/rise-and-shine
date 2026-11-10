@@ -46,7 +46,7 @@ export function Header() {
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-md focus:bg-char focus:px-4 focus:py-2 focus:text-cream">
         Skip to content
       </a>
-      <div className="mx-auto flex h-[72px] max-w-[1800px] items-center justify-between gap-6 px-[4.5%] lg:h-[76px]">
+      <div className="mx-auto flex h-[72px] max-w-[1800px] items-center justify-between gap-6 pr-[4.5%] pl-0 lg:h-[84px]">
         <Link href="/" aria-label="Rise N’ Shine Breakfast Place, home" className="shrink-0"><Logo plain /></Link>
 
         <nav aria-label="Main" className="hidden items-center gap-8 font-nav text-[0.95rem] uppercase tracking-wide lg:flex xl:gap-12">

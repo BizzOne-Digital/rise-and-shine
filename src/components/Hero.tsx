@@ -77,7 +77,7 @@ export function Hero() {
         </motion.div>
         <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(25,18,12,.86)_0%,rgba(25,18,12,.62)_34%,rgba(25,18,12,.12)_64%,rgba(25,18,12,0)_100%),linear-gradient(0deg,rgba(24,17,10,.55),transparent_24%)] max-md:bg-[linear-gradient(90deg,rgba(25,18,12,.85),rgba(25,18,12,.5)_85%),linear-gradient(0deg,rgba(24,17,10,.6),transparent_40%)]" />
 
-        <div className="mx-auto flex min-h-[560px] max-w-[1800px] flex-col justify-center px-[5%] py-14 sm:min-h-[640px] sm:py-20 md:min-h-[calc(100svh-76px-68px)] md:px-[4.5%]">
+        <div className="mx-auto flex min-h-[560px] max-w-[1800px] flex-col justify-center px-[5%] py-14 sm:min-h-[640px] sm:py-20 md:min-h-[calc(100svh-84px-68px)] md:px-[4.5%]">
           <Stamp />
           <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}
             className="text-[0.72rem] font-semibold uppercase tracking-[0.3em] md:text-[0.8rem]">

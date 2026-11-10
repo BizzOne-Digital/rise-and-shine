@@ -2,11 +2,11 @@
 export function Logo({ className = "", size = "md", plain = false }: { className?: string; tone?: "dark" | "light"; size?: "md" | "lg"; plain?: boolean }) {
   const h = size === "lg" ? "h-[104px] sm:h-[124px]" : "h-[52px] sm:h-[56px] lg:h-[62px]";
   if (plain) {
-    // Full-colour logo on transparent/white, for light backgrounds such as the header.
+    // Header logo: the full black logo image, uncropped, with square corners.
     return (
       <span role="img" aria-label="Rise N’ Shine Breakfast Place"
-        className={`block aspect-[780/356] bg-contain bg-left bg-no-repeat ${h} ${className}`}
-        style={{ backgroundImage: "url(/brand/logo-white.png)" }} />
+        className={`block aspect-video h-[72px] bg-black bg-cover bg-center bg-no-repeat lg:h-[84px] ${className}`}
+        style={{ backgroundImage: "url(/brand/logo.png)" }} />
     );
   }
   return (
