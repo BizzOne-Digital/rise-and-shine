@@ -7,6 +7,11 @@ const nextConfig = {
     formats: ["image/webp"],
   },
   experimental: { serverActions: { bodySizeLimit: "1mb" } },
+  // Keep old-site URLs working so search engines transfer their ranking (301 = permanent).
+  // /menu, /about-us, /services and /contact keep the same paths on the new site.
+  async redirects() {
+    return [{ source: "/specials", destination: "/menu", permanent: true }];
+  },
   async headers() {
     return [
       {

@@ -17,12 +17,12 @@ const FILIPINO_STORY: [string, string][] = [
   ["Pork Tocino", "Pan fried sugar-cured pork on the same sunny plate."],
   ["Crispy Sisig", "Spicy crispy pork belly, tossed with mayo, with garlic rice and a fried egg."],
   ["Ube French Toast", "Ube cream cheese, condensed milk and a little cinnamon."],
-  ["Buko Pandan Pancake", "Pandan pancake with sweetened coconut string."],
+  ["Ensaymada Waffle", "Filipino inspired pastry topped with sweet cream cheese and grated cheese."],
 ];
 
 const STRIP = [
   { src: IMG.tapa, alt: "Illustrative image of beef tapa with garlic rice and egg", label: "Beef Tapa" },
-  { src: IMG.pandan, alt: "Illustrative image of pandan pancakes", label: "Pandan pancakes" },
+  { src: IMG.pandan, alt: "Illustrative image of ricotta pancakes", label: "Ricotta pancake" },
   { src: IMG.tocino, alt: "Illustrative image of pork tocino", label: "Pork Tocino" },
   { src: IMG.ensaymada, alt: "Illustrative image of an ensaymada waffle", label: "Ensaymada waffle" },
   { src: IMG.longanisa, alt: "Illustrative image of longanisa", label: "Longanisa" },
@@ -32,7 +32,8 @@ const STRIP = [
 
 function Price({ cents }: { cents: number | null }) {
   const p = formatCAD(cents);
-  return <span className={`shrink-0 rounded-full px-3 py-1 text-base font-black ${p ? "bg-sun text-white" : "bg-char/10"}`}>{p ?? "Price on request"}</span>;
+  if (!p) return null; // no "Price on request" label
+  return <span className="shrink-0 rounded-full bg-sun px-3 py-1 text-base font-black text-white">{p}</span>;
 }
 
 function SignatureTile({ item, big }: { item: PubItem; big?: boolean }) {
@@ -201,7 +202,7 @@ export default async function Home() {
         </section>
       ) : (
         <section className="mx-auto max-w-4xl px-4 py-14 sm:py-20 lg:py-24 text-center sm:px-6">
-          <Reveal><h2 className="display-xl text-5xl">Been in lately?</h2><p className="mt-3 font-serif2 text-xl">We would love to hear how your breakfast went.</p><div className="mt-6"><Pill href={BUSINESS.googleReviewUrl} external variant="dark">Review us on Google</Pill></div></Reveal>
+          <Reveal><h2 className="display-xl text-5xl">Been in lately?</h2><p className="mt-3 font-serif2 text-xl">We would love to hear how your breakfast went. Review the location you visited.</p><div className="mt-6 flex flex-wrap justify-center gap-3">{BUSINESS.reviewLinks.map((r) => <Pill key={r.name} href={r.url} external variant="dark">Review us: {r.name}</Pill>)}</div></Reveal>
         </section>
       )}
 
@@ -217,7 +218,7 @@ export default async function Home() {
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:py-20 lg:py-24 sm:px-6 md:grid-cols-[1.3fr_1fr]">
           <div>
             <SplitHeading text="Bringing the whole crew?" className="display-xl text-[clamp(3rem,8vw,6.5rem)]" />
-            <Reveal delay={0.1}><p className="mt-4 max-w-xl font-serif2 text-xl">Send a booking request for your family or group. Your reservation is confirmed only after the restaurant approves it. Planning catering? Send an inquiry instead.</p></Reveal>
+            <Reveal delay={0.1}><p className="mt-4 max-w-xl font-serif2 text-xl">We take table reservations on weekdays only (Monday to Friday), not on weekends. Weekend visits are first come, first served. Send a booking request for your family or group. Your reservation is confirmed only after the restaurant approves it. Planning catering? Send an inquiry instead.</p></Reveal>
             <Reveal delay={0.16} className="mt-8 flex flex-wrap gap-3">
               <Magnetic><Pill href="/book" variant="dark">Request a table</Pill></Magnetic>
               <Pill href="mailto:rnsbreakfast@gmail.com?subject=Catering%20inquiry" variant="outline">Catering inquiry</Pill>

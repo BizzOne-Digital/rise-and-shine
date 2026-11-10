@@ -16,7 +16,7 @@ export default async function Book({ searchParams }: { searchParams: Promise<{ l
     <>
       {source === "preview" && <PreviewBanner />}
       <PageHero image={{ src: IMG.interior, alt: "Illustrative image of a warm, sunlit cafe interior" }} eyebrow="Booking request" title={<>Save us a <span className="text-gold">spot?</span></>}>
-        <p>Families and groups are welcome. Tell us when you would like to come and we will confirm.</p>
+        <p>Families and groups are welcome. We take reservations on weekdays only (Monday to Friday), not on weekends. Tell us when you would like to come and we will confirm.</p>
       </PageHero>
       <section className="mx-auto max-w-3xl px-4 py-10 sm:py-16 sm:px-6">
         <Reveal><div className="rounded-[2rem] border-4 border-char bg-white p-6 shadow-[8px_8px_0_#211A16] sm:p-10">

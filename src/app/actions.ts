@@ -5,7 +5,7 @@ import { connectDB } from "@/lib/db";
 import { env } from "@/lib/env";
 import { BookingRequest, Location, SiteSettings } from "@/lib/models";
 import { bookingSchema, looksLikeSpam } from "@/lib/validation";
-import { DEFAULT_RULES, edmontonToUtc, validateBookingWindow, type HoursConfig } from "@/lib/hours";
+import { DEFAULT_RULES, edmontonToUtc, validateBookingWindow, weekdayOf, type HoursConfig } from "@/lib/hours";
 import { clientKey, rateLimit } from "@/lib/ratelimit";
 import { notifyStaff } from "@/lib/notify";
 import { BUSINESS } from "@/lib/content";
@@ -49,6 +49,10 @@ export async function submitBooking(_prev: FormState, fd: FormData): Promise<For
     if (settings?.bookingsEnabled === false || loc.acceptsBookings === false)
       return { error: `Booking requests are paused for this location. Please call ${BUSINESS.phoneDisplay}.` };
 
+    if ([0, 6].includes(weekdayOf(d.date))) {
+      const m = "We only take reservations on weekdays (Monday to Friday), not on weekends. Please choose a weekday.";
+      return { error: m, fieldErrors: { date: m } };
+    }
     const cfg: HoursConfig = { weekly: JSON.parse(JSON.stringify(loc.weekly)), overrides: JSON.parse(JSON.stringify(loc.overrides ?? [])) };
     const rules = { ...DEFAULT_RULES, ...JSON.parse(JSON.stringify(loc.rules ?? {})) };
     const problem = validateBookingWindow({ date: d.date, time: d.time, partySize: d.partySize }, cfg, rules);

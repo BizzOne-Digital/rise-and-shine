@@ -16,6 +16,11 @@ export const BUSINESS = {
     tiktok: "https://tiktok.com/@rnsbreakfastplace",
   },
   googleReviewUrl: "https://g.page/r/CYRsgTkp6YKiEAE/review",
+  // One Google review link per location. TODO: replace with each location's own review link.
+  reviewLinks: [
+    { name: "Forest Lawn", url: "https://g.page/r/CYRsgTkp6YKiEAE/review" },
+    { name: "The District", url: "https://g.page/r/CYRsgTkp6YKiEAE/review" },
+  ],
   servingSince: 2020, // About page: "proudly serving the Calgary area and beyond as early as 2020"
 };
 
@@ -40,11 +45,11 @@ export type SeedLocation = {
 export const LOCATIONS: SeedLocation[] = [
   {
     slug: "forest-lawn", name: "Forest Lawn", street: "2014 36 ST SE", city: "Calgary", region: "AB", postalCode: "T2B 0X8",
-    phone: BUSINESS.phone, email: BUSINESS.email, order: 1, weekly: generalWeekly, overrides: [], hoursConfirmed: false,
+    phone: "4032716517", email: BUSINESS.email, order: 1, weekly: generalWeekly, overrides: [], hoursConfirmed: false,
   },
   {
     slug: "the-district", name: "The District", street: "Unit 120 - 11064 14 ST NE", city: "Calgary", region: "AB", postalCode: "T3K 0Z8",
-    phone: BUSINESS.phone, email: BUSINESS.email, order: 2, weekly: generalWeekly, overrides: [], hoursConfirmed: false,
+    phone: "8252056390", email: BUSINESS.email, order: 2, weekly: generalWeekly, overrides: [], hoursConfirmed: false,
   },
 ];
 
@@ -67,7 +72,6 @@ export const ITEMS: SeedItem[] = [
   { category: "filipino-inspired", name: "Ube French Toast", signature: true, description: "Ube white toast dipped in milk, eggs, nutmeg and cinnamon mixture with ube cream cheese and drizzled with condensed milk." },
   { category: "filipino-inspired", name: "Tapa Poutine", signature: true, description: "All time favorite beef tapa, hashbrowns, curd cheese, 2 poached eggs, hollandaise sauce and choice of toast." },
   { category: "filipino-inspired", name: "Ensaymada Waffle", signature: true, description: "Filipino inspired pastry topped with sweet cream cheese, and grated cheese." },
-  { category: "filipino-inspired", name: "Buko Pandan Pancake", signature: true, description: "Pandan flavored pancake with sweetened coconut string." },
   { category: "filipino-inspired", name: "Sunrise Steak", description: "Grilled 6oz-7oz sirloin steak, served with garlic rice or hashbrown, fried egg, mango salsa and gravy." },
   { category: "the-classics", name: "Classic Breakfast", signature: true, description: "Choice of bacon, maple sausage, apple sausage or ham, 2 fried eggs, hashbrowns and choice of toast or classic pancake." },
   { category: "the-classics", name: "French Toast", description: "White toast dipped in the richness of milk, eggs, nutmeg and cinnamon, topped with cream cheese. Served with fruits, whipped cream and maple syrup." },

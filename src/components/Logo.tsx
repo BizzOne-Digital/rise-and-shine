@@ -1,6 +1,6 @@
 /** The supplied logo (public/brand/logo.png, 1280x720 on black) in a black rounded tile, cropped to the artwork. */
 export function Logo({ className = "", size = "md" }: { className?: string; tone?: "dark" | "light"; size?: "md" | "lg" }) {
-  const h = size === "lg" ? "h-[104px] sm:h-[124px]" : "h-[62px] sm:h-[70px] lg:h-[82px]";
+  const h = size === "lg" ? "h-[104px] sm:h-[124px]" : "h-[52px] sm:h-[56px] lg:h-[60px]";
   return (
     <span
       role="img"

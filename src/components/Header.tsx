@@ -12,12 +12,13 @@ const Arrow = ({ className = "" }: { className?: string }) => (
 
 // Desktop shows the three primary links from the design; the full list lives in the mobile menu and footer.
 const DESKTOP = [
-  { href: "/menu", label: "Our Menu" },
+  { href: "/menu", label: "Menu" },
   { href: "/about-us", label: "Our Story" },
   { href: "/contact#locations", label: "Visit Us" },
+  { href: "/contact", label: "Contact Us" },
 ];
 const ALL = [
-  { href: "/menu", label: "Our Menu" },
+  { href: "/menu", label: "Menu" },
   { href: "/about-us", label: "Our Story" },
   { href: "/services", label: "Services" },
   { href: "/testimonials", label: "Testimonials" },
@@ -45,10 +46,10 @@ export function Header() {
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-md focus:bg-char focus:px-4 focus:py-2 focus:text-cream">
         Skip to content
       </a>
-      <div className="mx-auto flex h-[88px] max-w-[1800px] items-center justify-between gap-6 px-[4.5%] lg:h-[102px]">
+      <div className="mx-auto flex h-[72px] max-w-[1800px] items-center justify-between gap-6 px-[4.5%] lg:h-[76px]">
         <Link href="/" aria-label="Rise N’ Shine Breakfast Place, home" className="shrink-0"><Logo /></Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-12 font-serif2 text-[1.05rem] lg:flex xl:gap-14">
+        <nav aria-label="Main" className="hidden items-center gap-8 font-nav text-[0.95rem] uppercase tracking-wide lg:flex xl:gap-12">
           {DESKTOP.map((n) => (
             <Link key={n.href} href={n.href} aria-current={pathname === n.href ? "page" : undefined}
               className="group relative py-3 font-medium text-char">
@@ -58,7 +59,7 @@ export function Header() {
           ))}
         </nav>
 
-        <Link href="/book" className="btn-press group hidden items-center gap-6 rounded-md bg-sun px-7 py-4 font-serif2 text-[1.05rem] font-semibold text-white transition-colors hover:bg-sun-red lg:inline-flex">
+        <Link href="/book" className="btn-press group hidden items-center gap-4 rounded-md bg-sun px-6 py-3 font-nav text-[0.95rem] font-semibold text-white transition-colors hover:bg-sun-red lg:inline-flex">
           Let’s do breakfast <Arrow className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </Link>
 
@@ -74,7 +75,7 @@ export function Header() {
 
       <AnimatePresence>
         {open && (
-          <motion.div id="mobile-nav" className="on-orange fixed inset-x-0 bottom-0 top-[84px] z-40 overflow-y-auto bg-sun lg:hidden"
+          <motion.div id="mobile-nav" className="on-orange fixed inset-x-0 bottom-0 top-[72px] z-40 overflow-y-auto bg-sun lg:hidden"
             initial={{ clipPath: "circle(0% at 90% 0%)" }} animate={{ clipPath: "circle(150% at 90% 0%)" }} exit={{ clipPath: "circle(0% at 90% 0%)" }}
             transition={{ duration: 0.55, ease: [0.2, 0.7, 0.2, 1] }}>
             <nav aria-label="Mobile" className="flex min-h-full flex-col justify-between px-6 pb-10 pt-8 text-white">

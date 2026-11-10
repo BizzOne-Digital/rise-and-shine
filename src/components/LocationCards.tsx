@@ -13,6 +13,7 @@ export function LocationCards({ locations, hoursNote, withMap = false }: { locat
             <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-sun">Location {i + 1}</p>
             <h3 id={`loc-${l.slug}`} className="display-lg mt-1 text-4xl">{l.name}</h3>
             <address className="mt-3 text-lg not-italic">{l.street}<br />{l.city}, {l.region} {l.postalCode}</address>
+            <p className="mt-1 text-lg font-bold">{l.phone.replace(/D/g, "").replace(/^(d{3})(d{3})(d{4})$/, "($1) $2-$3")}</p>
             <p className="mt-3 rounded-full bg-gold/30 px-4 py-2 text-char"><TodayHours weekly={l.weekly} overrides={l.overrides} /></p>
             <details className="mt-4 rounded-xl border-2 border-char/15 p-3">
               <summary className="min-touch cursor-pointer font-extrabold">Opening hours</summary>
