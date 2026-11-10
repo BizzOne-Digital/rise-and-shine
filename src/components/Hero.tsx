@@ -72,7 +72,7 @@ export function Hero() {
       <section ref={ref} aria-labelledby="hero-title" className="on-dark relative isolate overflow-hidden bg-[#2a1a10] text-cream">
         <motion.div style={{ y: bgY }} className="absolute inset-0 -z-20">
           <motion.div className="absolute inset-0" initial={{ scale: 1.1, opacity: 0.4 }} animate={{ scale: 1.04, opacity: 1 }} transition={{ duration: 1.8, ease }}>
-            <Image src="/images/hero-bg.png" alt="Eggs Benedict on a waffle, ube French toast, coffee and orange juice on a sunlit wooden table (illustrative image)" fill priority quality={80} sizes="100vw" className="object-cover object-[50%_38%]" />
+            <Image src="/images/hero-bg.png" alt="Beef tapa with garlic rice and egg, ube French toast, a latte and orange juice on a sunlit wooden table" fill priority quality={80} sizes="100vw" className="object-cover object-[50%_38%]" />
           </motion.div>
         </motion.div>
         <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(25,18,12,.86)_0%,rgba(25,18,12,.62)_34%,rgba(25,18,12,.12)_64%,rgba(25,18,12,0)_100%),linear-gradient(0deg,rgba(24,17,10,.55),transparent_24%)] max-md:bg-[linear-gradient(90deg,rgba(25,18,12,.85),rgba(25,18,12,.5)_85%),linear-gradient(0deg,rgba(24,17,10,.6),transparent_40%)]" />

@@ -6,7 +6,7 @@ export function Logo({ className = "", size = "md", plain = false }: { className
     return (
       <span role="img" aria-label="Rise N’ Shine Breakfast Place"
         className={`block aspect-[188/84] h-[72px] bg-black bg-no-repeat lg:h-[84px] ${className}`}
-        style={{ backgroundImage: "url(/brand/logo.png)", backgroundSize: "auto 373%", backgroundPosition: "50% 50%" }} />
+        style={{ backgroundImage: "url(/brand/logo.png)", backgroundSize: "auto 210%", backgroundPosition: "50% 50%" }} />
     );
   }
   return (
