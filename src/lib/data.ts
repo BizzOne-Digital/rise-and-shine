@@ -2,7 +2,7 @@ import "server-only";
 import { connectDB } from "./db";
 import { env } from "./env";
 import * as M from "./models";
-import { BUSINESS, CATEGORIES, HOURS_NOTE, ITEMS, LOCATIONS, SERVICES } from "./content";
+import { BUSINESS, CATEGORIES, HOURS_NOTE, ITEMS, LOCATIONS, LOCATION_PHONES, SERVICES } from "./content";
 import { conceptFor, realPhotoFor, resolveImage } from "./stockImages";
 import { DEFAULT_RULES, type BookingRules, type DayHours, type HolidayOverride } from "./hours";
 
@@ -43,7 +43,7 @@ type Lean = any;
 
 const mapLocation = (l: Lean): PubLocation => ({
   slug: l.slug, name: l.name, street: str(l.street), city: str(l.city), region: str(l.region), postalCode: str(l.postalCode),
-  phone: str(l.phone), email: str(l.email),
+  phone: LOCATION_PHONES[l.slug] ?? str(l.phone), email: str(l.email),
   weekly: (l.weekly ?? []).map((d: Lean) => ({ closed: !!d.closed, open: str(d.open), close: str(d.close) })),
   overrides: (l.overrides ?? []).map((o: Lean) => ({ date: o.date, closed: !!o.closed, open: o.open, close: o.close, note: o.note })),
   hoursConfirmed: !!l.hoursConfirmed,

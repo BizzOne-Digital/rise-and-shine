@@ -106,6 +106,9 @@ export const SERVICES: SeedService[] = [
   { slug: "groups-events", title: "Group gatherings & events", summary: "Planning a family brunch or a get-together? Send an event inquiry and the team will help you plan.", cta: "event", ctaLabel: "Send an event inquiry", order: 5 },
 ];
 
+/** Confirmed location numbers. Applied on top of whatever is stored in the database, so the old personal number can never show. */
+export const LOCATION_PHONES: Record<string, string> = { "forest-lawn": "4032715170", "the-district": "8252056390" };
+
 export const formatPhone = (p: string) => p.replace(/\D/g, "").replace(/^(\d{3})(\d{3})(\d{4})$/, "($1) $2-$3");
 export const telHref = (p: string) => `tel:+1${p.replace(/\D/g, "")}`;
 
