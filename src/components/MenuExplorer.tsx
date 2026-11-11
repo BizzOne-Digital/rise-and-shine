@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { useMemo, useState } from "react";
-import { formatCAD } from "@/lib/money";
+import { BUSINESS } from "@/lib/content";
 import type { PubCategory, PubItem } from "@/lib/data";
 import { DishArt } from "./Art";
 import { inputCls } from "./FormKit";
@@ -33,7 +33,8 @@ export function MenuExplorer({ categories, items, locations, pdfUrl }: { categor
     <div>
       <div className="sticky top-[72px] z-30 -mx-4 border-b border-char/10 bg-cream/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 md:flex-row md:items-center">
-          <div role="tablist" aria-label="Menu categories" className="hide-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 py-1">
+          <div className="flex min-w-0 items-center gap-2">
+          <div role="tablist" aria-label="Menu categories" className="hide-scrollbar -mx-1 flex min-w-0 gap-2 overflow-x-auto px-1 py-1">
             {[{ id: "all", name: "All dishes" }, ...categories].map((c) => (
               <button key={c.id} role="tab" aria-selected={cat === c.id} onClick={() => setCat(c.id)}
                 className={`btn-press min-touch relative shrink-0 rounded-full border-2 border-char px-5 font-extrabold ${cat === c.id ? "text-cream" : "bg-white hover:bg-gold/30"}`}>
@@ -41,6 +42,8 @@ export function MenuExplorer({ categories, items, locations, pdfUrl }: { categor
                 <span className="relative z-10">{c.name}</span>
               </button>
             ))}
+          </div>
+          <a href={pdfUrl || BUSINESS.menuPdf} target="_blank" rel="noopener noreferrer" className="btn-press min-touch inline-flex shrink-0 items-center rounded-full bg-sun px-5 text-sm font-extrabold uppercase tracking-wide text-white">Download full menu<span className="sr-only"> (opens in a new tab)</span></a>
           </div>
           <div className="flex flex-1 gap-2 md:justify-end">
             <label className="sr-only" htmlFor="menu-search">Search the menu</label>
@@ -60,12 +63,8 @@ export function MenuExplorer({ categories, items, locations, pdfUrl }: { categor
 
       <p className="sr-only" role="status" aria-live="polite">{view.length} dishes shown</p>
 
-      {pdfUrl && (
-        <p className="mt-6"><a href={pdfUrl} target="_blank" rel="noopener noreferrer" className="font-extrabold underline decoration-sun decoration-4 underline-offset-4">Download the full menu (PDF)</a></p>
-      )}
-
       {items.length === 0 ? (
-        <p className="mt-12 rounded-2xl bg-white p-8 text-lg font-bold">The menu is being updated. Please check back soon, or call us at (403) 707-6529.</p>
+        <p className="mt-12 rounded-2xl bg-white p-8 text-lg font-bold">The menu is being updated. Please check back soon, or call us at (403) 271-5170 (Forest Lawn) or (825) 205-6390 (The District).</p>
       ) : view.length === 0 ? (
         <div className="mt-12 rounded-2xl border-4 border-dashed border-char/30 bg-white p-8 text-center">
           <p className="display-lg text-3xl">Nothing matches “{q}”.</p>
@@ -92,7 +91,6 @@ export function MenuExplorer({ categories, items, locations, pdfUrl }: { categor
 }
 
 function Dish({ item, offset }: { item: PubItem; offset: boolean }) {
-  const price = formatCAD(item.priceCents);
   return (
     <motion.li layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className={`group ${offset ? "lg:mt-10" : ""} ${item.available ? "" : "opacity-70"}`}>
       <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] border-4 border-char bg-cream-dark">
@@ -105,7 +103,6 @@ function Dish({ item, offset }: { item: PubItem; offset: boolean }) {
       </div>
       <div className="mt-3 flex flex-wrap items-start justify-between gap-x-3 gap-y-2">
         <h3 className="display-lg min-w-0 break-words text-2xl">{item.name}</h3>
-        <p className={`shrink-0 rounded-full px-3 py-1 text-base font-black ${price ? "bg-sun text-white" : "bg-char/10 text-char"}`}>{price ?? "Price on request"}</p>
       </div>
       {item.description && <p className="mt-1.5 text-base leading-relaxed text-char/90">{item.description}</p>}
       {item.dietary.length > 0 && <p className="mt-2 text-sm font-bold">{item.dietary.join(" · ")}</p>}

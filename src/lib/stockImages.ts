@@ -48,6 +48,16 @@ export const IMG = {
   chef: B + "15-chef-finishing-dish.png",
 } as const;
 
+/** Real photos of our own dishes, supplied by the restaurant. Keyed by lower-case dish name. */
+const REAL_PHOTOS: Record<string, string> = {
+  "beef tapa": "/images/dishes/beef-tapa.jpg",
+  "ube french toast": "/images/dishes/ube-french-toast.jpg",
+  "crispy sisig": "/images/dishes/crispy-sisig.png",
+  "pork tocino": "/images/dishes/pork-tocino.png",
+  "loco moco": "/images/dishes/loco-moco.png",
+};
+export const realPhotoFor = (name: string): string | null => REAL_PHOTOS[name.toLowerCase()] ?? null;
+
 /** Concept image for a dish by name, only where the picture genuinely matches the dish type. */
 export function conceptFor(name: string): string | null {
   const n = name.toLowerCase();

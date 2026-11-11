@@ -1,7 +1,7 @@
 import { IMG } from "@/lib/stockImages";
 import type { Metadata } from "next";
 import { PageHero, PreviewBanner } from "@/components/Bits";
-import { BookingForm } from "@/components/Forms";
+import { ContactForm } from "@/components/Forms";
 import { Pill } from "@/components/Bits";
 import { LocationCards } from "@/components/LocationCards";
 import { Reveal } from "@/components/Motion";
@@ -10,54 +10,63 @@ import { BUSINESS } from "@/lib/content";
 import { env } from "@/lib/env";
 
 export const metadata: Metadata = {
-  title: "Contact & Visit",
+  title: "Contact Us",
   description: "Find Rise N’ Shine in Calgary: Forest Lawn and The District. Hours, directions, phone, email, contact form and booking requests.",
 };
 export const dynamic = "force-dynamic";
 
 export default async function Contact() {
   const [{ data: locations, source }, { data: settings }] = await Promise.all([getLocations(), getSettings()]);
-  const formLocations = locations.map((l) => ({ slug: l.slug, name: l.name, weekly: l.weekly, overrides: l.overrides, rules: l.rules, acceptsBookings: l.acceptsBookings }));
   const dbOk = env.dbConfigured;
   return (
     <>
       {source === "preview" && <PreviewBanner />}
-      <PageHero image={{ src: IMG.family, alt: "Illustrative image of a family sharing breakfast" }} eyebrow="Contact & visit" title={<>Come <span className="text-gold">hungry.</span></>}>
-        <p>Two Calgary locations, one friendly team. Call, email, send a message or request a table.</p>
+      <PageHero image={{ src: IMG.family, alt: "Illustrative image of a family sharing breakfast" }} eyebrow="Contact us" title={<>Come <span className="text-gold">hungry.</span></>}>
+        <p>Serving up your favorite morning comforts across two Calgary locations. Reach out today to say hello or book a table.</p>
       </PageHero>
-
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:py-16 sm:px-6">
-        <ul className="grid gap-4 md:grid-cols-3 [&>li]:min-w-0">
-          <li><a href="tel:+14037076529" className="btn-press block rounded-2xl border-4 border-char bg-white p-5 hover:bg-gold/30"><span className="block text-sm font-extrabold uppercase tracking-wider text-sun">Call</span><span className="display-lg block text-3xl [overflow-wrap:anywhere]">{BUSINESS.phoneDisplay}</span></a></li>
-          <li><a href={`mailto:${BUSINESS.email}`} className="btn-press block rounded-2xl border-4 border-char bg-white p-5 hover:bg-gold/30"><span className="block text-sm font-extrabold uppercase tracking-wider text-sun">Email</span><span className="display-lg block text-2xl [overflow-wrap:anywhere]">{BUSINESS.email}</span></a></li>
-          <li><a href={BUSINESS.social.instagram} target="_blank" rel="noopener noreferrer" className="btn-press block rounded-2xl border-4 border-char bg-white p-5 hover:bg-gold/30"><span className="block text-sm font-extrabold uppercase tracking-wider text-sun">Instagram<span className="sr-only"> (opens in a new tab)</span></span><span className="display-lg block text-2xl [overflow-wrap:anywhere] sm:text-3xl">{BUSINESS.handle}</span></a></li>
-        </ul>
-        <ul className="mt-4 flex flex-wrap gap-3 text-base font-bold">
-          <li><a className="underline underline-offset-4" href={BUSINESS.social.facebook} target="_blank" rel="noopener noreferrer">Facebook<span className="sr-only"> (opens in a new tab)</span></a></li>
-          <li><a className="underline underline-offset-4" href={BUSINESS.social.tiktok} target="_blank" rel="noopener noreferrer">TikTok<span className="sr-only"> (opens in a new tab)</span></a></li>
-        </ul>
-      </section>
 
       <section id="locations" className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-20 sm:px-6" aria-labelledby="locs">
         <h2 id="locs" className="display-xl mb-8 text-[clamp(2.4rem,6vw,4.6rem)]">Our locations</h2>
         <LocationCards locations={locations} hoursNote={settings.hoursNote} withMap />
       </section>
 
-      <section className="on-dark grain relative bg-char py-12 sm:py-16 lg:py-20 text-cream">
+      <section id="contact-us" className="on-dark grain relative scroll-mt-20 bg-char py-12 sm:py-16 lg:py-20 text-cream">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2">
           <Reveal>
-            <h2 className="display-xl text-[clamp(2.2rem,5vw,4rem)] text-gold">Questions, catering or events?</h2>
-            <p className="mt-3 font-serif2 text-xl">Call or email the team. A catering or event inquiry is not a table booking, so use the booking form for dining.</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Pill href="tel:+14037076529" variant="orange">Call {BUSINESS.phoneDisplay}</Pill>
-              <Pill href={"mailto:rnsbreakfast@gmail.com?subject=" + encodeURIComponent("Catering inquiry")} variant="cream">Email us</Pill>
-            </div>
+            <h2 className="display-xl text-[clamp(2.2rem,5vw,4rem)] text-gold">Mabuhay! Let’s chat over breakfast.</h2>
+            <p className="mt-3 font-serif2 text-xl">Whether you have a question about our menu, want to plan a big family breakfast, or just want to send some love to the team. Drop us a line below! <em>Salamat!</em></p>
+            <div className="mt-6 rounded-[1.6rem] bg-cream p-6 text-char"><ContactForm enabled={dbOk} /></div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div id="booking" className="scroll-mt-28" />
-            <h2 className="display-xl text-[clamp(2.2rem,5vw,4rem)] text-gold">Request a table</h2>
-            <p className="mt-3 text-lg">For dining at one of our locations.</p>
-            <div className="mt-6 rounded-[1.6rem] bg-cream p-6 text-char"><BookingForm idp="bk-" locations={formLocations} enabled={dbOk && settings.bookingsEnabled} /></div>
+            <h2 className="display-xl text-[clamp(2.2rem,5vw,4rem)] text-gold">Looking for a specific spot?</h2>
+            <p className="mt-3 text-xl font-extrabold">Find your nearest Rise N’ Shine</p>
+            <p className="mt-2 font-serif2 text-xl">Want to check our hours, ask about a location or secure a table? Connect directly with the team at your neighborhood spot.</p>
+            <div className="mt-6"><Pill href="/contact" variant="orange">Find a location</Pill></div>
+
+            <h3 className="mt-12 text-sm font-extrabold uppercase tracking-[0.18em] text-gold">Ways to reach us</h3>
+            <ul className="mt-5 space-y-6">
+              <li className="flex items-start gap-4">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="mt-1 shrink-0 text-gold"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+                <div>
+                  <p className="text-sm font-extrabold uppercase tracking-wider text-gold">General inquiries</p>
+                  <a href={`mailto:${BUSINESS.email}`} className="text-xl font-bold [overflow-wrap:anywhere] hover:text-gold">Rnsbreakfast@gmail.com</a>
+                </div>
+              </li>
+              <li className="flex items-start gap-4">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="mt-1 shrink-0 text-gold"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21h3z" /></svg>
+                <div>
+                  <p className="text-sm font-extrabold uppercase tracking-wider text-gold">Facebook</p>
+                  <a href={BUSINESS.social.facebook} target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-gold">@Rnsbreakfastplace<span className="sr-only"> (opens in a new tab)</span></a>
+                </div>
+              </li>
+              <li className="flex items-start gap-4">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="mt-1 shrink-0 text-gold"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor" /></svg>
+                <div>
+                  <p className="text-sm font-extrabold uppercase tracking-wider text-gold">Instagram</p>
+                  <a href={BUSINESS.social.instagram} target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-gold">@RNSBREAKFASTPLACE<span className="sr-only"> (opens in a new tab)</span></a>
+                </div>
+              </li>
+            </ul>
           </Reveal>
         </div>
       </section>

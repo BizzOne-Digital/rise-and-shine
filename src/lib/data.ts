@@ -3,7 +3,7 @@ import { connectDB } from "./db";
 import { env } from "./env";
 import * as M from "./models";
 import { BUSINESS, CATEGORIES, HOURS_NOTE, ITEMS, LOCATIONS, SERVICES } from "./content";
-import { conceptFor, resolveImage } from "./stockImages";
+import { conceptFor, realPhotoFor, resolveImage } from "./stockImages";
 import { DEFAULT_RULES, type BookingRules, type DayHours, type HolidayOverride } from "./hours";
 
 // ---- Public view types (plain, serialisable) ----
@@ -82,7 +82,7 @@ export async function getMenu() {
         items: items.map((i) => ({
           id: String(i._id), categoryId: String(i.category), name: i.name, description: str(i.description),
           priceCents: typeof i.priceCents === "number" && i.priceCents > 0 ? i.priceCents : null,
-          imageUrl: resolveImage(i.image) ?? conceptFor(i.name), illustrative: !resolveImage(i.image), imageAlt: resolveImage(i.image) ? i.name : `Illustrative image: ${i.name}`,
+          imageUrl: resolveImage(i.image) ?? realPhotoFor(i.name) ?? conceptFor(i.name), illustrative: !resolveImage(i.image) && !realPhotoFor(i.name), imageAlt: resolveImage(i.image) || realPhotoFor(i.name) ? i.name : `Illustrative image: ${i.name}`,
           dietary: i.dietary ?? [], signature: !!i.signature, featured: !!i.featured, available: i.available !== false,
           overrides: (i.locationOverrides ?? []).map((o: Lean) => ({ locationSlug: o.locationSlug, priceCents: o.priceCents ?? null, available: o.available !== false })),
         })),
@@ -91,8 +91,8 @@ export async function getMenu() {
     () => ({
       categories: CATEGORIES.map((c) => ({ id: c.slug, slug: c.slug, name: c.name, blurb: c.blurb })),
       items: ITEMS.map((i) => ({
-        id: i.name, categoryId: i.category, name: i.name, description: i.description, priceCents: null, imageUrl: conceptFor(i.name), illustrative: true,
-        imageAlt: `Illustrative image: ${i.name}`, dietary: [], signature: !!i.signature, featured: false, available: true, overrides: [],
+        id: i.name, categoryId: i.category, name: i.name, description: i.description, priceCents: null, imageUrl: realPhotoFor(i.name) ?? conceptFor(i.name), illustrative: !realPhotoFor(i.name),
+        imageAlt: realPhotoFor(i.name) ? i.name : `Illustrative image: ${i.name}`, dietary: [], signature: !!i.signature, featured: false, available: true, overrides: [],
       })),
     }),
   );

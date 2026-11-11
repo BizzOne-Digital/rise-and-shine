@@ -3,8 +3,8 @@
 import { createHash } from "crypto";
 import { connectDB } from "@/lib/db";
 import { env } from "@/lib/env";
-import { BookingRequest, Location, SiteSettings } from "@/lib/models";
-import { bookingSchema, looksLikeSpam } from "@/lib/validation";
+import { BookingRequest, ContactMessage, Location, SiteSettings } from "@/lib/models";
+import { bookingSchema, contactSchema, looksLikeSpam } from "@/lib/validation";
 import { DEFAULT_RULES, edmontonToUtc, validateBookingWindow, weekdayOf, type HoursConfig } from "@/lib/hours";
 import { clientKey, rateLimit } from "@/lib/ratelimit";
 import { notifyStaff } from "@/lib/notify";
@@ -77,5 +77,25 @@ export async function submitBooking(_prev: FormState, fd: FormData): Promise<For
   } catch (e) {
     console.error("[submitBooking]", (e as Error).message);
     return { error: `We could not save your request. Please try again, or call ${BUSINESS.phoneDisplay}.` };
+  }
+}
+
+export async function submitContact(_prev: FormState, fd: FormData): Promise<FormState> {
+  const parsed = contactSchema.safeParse(Object.fromEntries(fd));
+  if (!parsed.success) return { error: "Please fix the highlighted fields.", fieldErrors: fieldErrors(parsed.error.issues) };
+  const d = parsed.data;
+  if (looksLikeSpam(d)) return { error: "We could not send that message. Please reload the page and try again." };
+  const blocked = await guard("contact", 5, 600);
+  if (blocked) return { error: blocked };
+  try {
+    await connectDB();
+    const saved = await ContactMessage.create({ firstName: d.firstName, lastName: d.lastName, email: d.email, phone: d.phone, message: d.message });
+    void notifyStaff(`New website message from ${d.firstName} ${d.lastName}`, [
+      `Name: ${d.firstName} ${d.lastName}`, `Email: ${d.email}`, d.phone ? `Phone: ${d.phone}` : "Phone: not provided", "", d.message, "", `Message id: ${saved._id}`,
+    ]);
+    return { ok: true, message: "Salamat! Your message has been sent. The team will get back to you soon." };
+  } catch (e) {
+    console.error("[submitContact]", (e as Error).message);
+    return { error: `We could not send your message. Please try again, or call ${BUSINESS.phoneDisplay}.` };
   }
 }

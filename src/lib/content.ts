@@ -6,8 +6,10 @@ import type { DayHours, HolidayOverride } from "./hours";
 export const BUSINESS = {
   name: "Rise N’ Shine Breakfast Place",
   email: "rnsbreakfast@gmail.com",
-  phone: "4037076529",
-  phoneDisplay: "(403) 707-6529",
+  // No single business line: guests call the location they are visiting.
+  phone: "4032715170",
+  phoneDisplay: "(403) 271-5170 (Forest Lawn) or (825) 205-6390 (The District)",
+  menuPdf: "/downloads/rise-n-shine-menu.pdf", // TODO: add the PDF to public/downloads/ (or set the menu PDF in admin settings)
   handle: "@rnsbreakfastplace",
   // Linked from the existing official website (re-verify before launch; see LAUNCH_CHECKLIST.md)
   social: {
@@ -64,18 +66,18 @@ export const CATEGORIES: SeedCategory[] = [
 export type SeedItem = { category: string; name: string; description: string; signature?: boolean };
 export const ITEMS: SeedItem[] = [
   { category: "filipino-inspired", name: "Beef Tapa", signature: true, description: "House marinated beef strips, served with garlic rice, fried egg and mango salsa." },
-  { category: "filipino-inspired", name: "Pork Tocino", description: "Pan fried sugar-cured pork, served with garlic rice, fried egg and mango salsa." },
+  { category: "filipino-inspired", name: "Pork Tocino", signature: true, description: "Pan fried sugar-cured pork, served with garlic rice, fried egg and mango salsa." },
   { category: "filipino-inspired", name: "Longanisa", description: "Sweet skinless sausage made of ground pork and served with garlic rice, fried egg and mango salsa." },
   { category: "filipino-inspired", name: "Daing na Bangus", description: "Milkfish house marinated with vinegar and spices, served with garlic rice, fried egg and mango salsa." },
   { category: "filipino-inspired", name: "Longga Breakfast Sandwich", description: "Double longanisa patty, cheddar cheese, tomato, avocado, on croissant with spicy garlic aioli. Served with hashbrown or salad." },
   { category: "filipino-inspired", name: "Crispy Sisig", signature: true, description: "Spicy crispy pork belly with red and green pepper, red onion, tossed with mayo and served with garlic rice and fried egg." },
   { category: "filipino-inspired", name: "Ube French Toast", signature: true, description: "Ube white toast dipped in milk, eggs, nutmeg and cinnamon mixture with ube cream cheese and drizzled with condensed milk." },
-  { category: "filipino-inspired", name: "Tapa Poutine", signature: true, description: "All time favorite beef tapa, hashbrowns, curd cheese, 2 poached eggs, hollandaise sauce and choice of toast." },
-  { category: "filipino-inspired", name: "Ensaymada Waffle", signature: true, description: "Filipino inspired pastry topped with sweet cream cheese, and grated cheese." },
+  { category: "filipino-inspired", name: "Tapa Poutine", description: "All time favorite beef tapa, hashbrowns, curd cheese, 2 poached eggs, hollandaise sauce and choice of toast." },
+  { category: "filipino-inspired", name: "Ensaymada Waffle", description: "Filipino inspired pastry topped with sweet cream cheese, and grated cheese." },
   { category: "filipino-inspired", name: "Sunrise Steak", description: "Grilled 6oz-7oz sirloin steak, served with garlic rice or hashbrown, fried egg, mango salsa and gravy." },
-  { category: "the-classics", name: "Classic Breakfast", signature: true, description: "Choice of bacon, maple sausage, apple sausage or ham, 2 fried eggs, hashbrowns and choice of toast or classic pancake." },
+  { category: "the-classics", name: "Classic Breakfast", description: "Choice of bacon, maple sausage, apple sausage or ham, 2 fried eggs, hashbrowns and choice of toast or classic pancake." },
   { category: "the-classics", name: "French Toast", description: "White toast dipped in the richness of milk, eggs, nutmeg and cinnamon, topped with cream cheese. Served with fruits, whipped cream and maple syrup." },
-  { category: "the-classics", name: "Loco Moco", description: "Grilled hamburger patty over garlic hawaiian rice, caramelized mushroom, onions, topped with bacon jam, gravy and 2 fried eggs." },
+  { category: "the-classics", name: "Loco Moco", signature: true, description: "Grilled hamburger patty over garlic hawaiian rice, caramelized mushroom, onions, topped with bacon jam, gravy and 2 fried eggs." },
   { category: "the-classics", name: "Philly Steak Poutine", description: "Sliced steak, mushrooms, red pepper, onion, smothered with alfredo sauce, hashbrowns, curd cheese, 2 poached eggs, hollandaise sauce and choice of toast." },
   { category: "the-classics", name: "Breakfast Poutine", description: "Hashbrowns, choice of meat, curd cheese, 2 poached eggs, hollandaise sauce and choice of toast." },
   { category: "the-classics", name: "Philly Steak Benedict", description: "Sliced steak, mushroom, onions, red pepper and smothered with alfredo sauce, on a homemade waffle, topped with 2 soft poached eggs, hollandaise sauce, hashbrowns and fruits." },
@@ -91,6 +93,7 @@ export const ITEMS: SeedItem[] = [
   { category: "the-classics", name: "BLT Egg Wrap", description: "Bacon, lettuce, tomato, scrambled eggs, mayo, mixed cheese, wrapped in whole wheat tortilla. Served with hashbrowns or salad." },
   { category: "the-classics", name: "Banana Nutella Waffle", description: "Waffle filled with banana, topped with Nutella." },
   { category: "the-classics", name: "Choco Banana Pancake", description: "Chocolate pancake filled with banana and chocolate chip." },
+  { category: "the-classics", name: "Lemon Ricotta Pancake", description: "Fluffy ricotta pancakes with a bright touch of lemon." },
 ];
 
 export type ServiceCta = "booking" | "catering" | "custom" | "event" | "menu";
@@ -102,6 +105,9 @@ export const SERVICES: SeedService[] = [
   { slug: "custom-orders", title: "Custom orders", summary: "Tell us about your dietary preferences and tastes and we will work with you on an order made for you.", cta: "custom", ctaLabel: "Start a custom order inquiry", order: 4 },
   { slug: "groups-events", title: "Group gatherings & events", summary: "Planning a family brunch or a get-together? Send an event inquiry and the team will help you plan.", cta: "event", ctaLabel: "Send an event inquiry", order: 5 },
 ];
+
+export const formatPhone = (p: string) => p.replace(/\D/g, "").replace(/^(\d{3})(\d{3})(\d{4})$/, "($1) $2-$3");
+export const telHref = (p: string) => `tel:+1${p.replace(/\D/g, "")}`;
 
 type Addr = { street: string; city: string; region: string; postalCode: string };
 const q = (l: Addr) => `${l.street}, ${l.city}, ${l.region} ${l.postalCode}`;

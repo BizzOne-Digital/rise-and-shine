@@ -10,7 +10,7 @@ import { getLocations, getMenu, getServices, getSettings, getTestimonials, type 
 import { formatCAD } from "@/lib/money";
 import { restaurantJsonLd } from "@/lib/jsonld";
 import { BUSINESS } from "@/lib/content";
-import { IMG, serviceImage } from "@/lib/stockImages";
+import { IMG, realPhotoFor, serviceImage } from "@/lib/stockImages";
 
 const FILIPINO_STORY: [string, string][] = [
   ["Beef Tapa", "House marinated beef strips with garlic rice, fried egg and mango salsa."],
@@ -21,9 +21,9 @@ const FILIPINO_STORY: [string, string][] = [
 ];
 
 const STRIP = [
-  { src: IMG.tapa, alt: "Illustrative image of beef tapa with garlic rice and egg", label: "Beef Tapa" },
+  { src: realPhotoFor("beef tapa") ?? IMG.tapa, alt: "Beef tapa with garlic rice, egg and mango salsa", label: "Beef Tapa" },
   { src: IMG.pandan, alt: "Illustrative image of ricotta pancakes", label: "Ricotta pancake" },
-  { src: IMG.tocino, alt: "Illustrative image of pork tocino", label: "Pork Tocino" },
+  { src: realPhotoFor("pork tocino") ?? IMG.tocino, alt: "Pork tocino with garlic rice, egg and mango salsa", label: "Pork Tocino" },
   { src: IMG.ensaymada, alt: "Illustrative image of an ensaymada waffle", label: "Ensaymada waffle" },
   { src: IMG.longanisa, alt: "Illustrative image of longanisa", label: "Longanisa" },
   { src: IMG.poutine, alt: "Illustrative image of breakfast poutine", label: "Breakfast poutine" },
@@ -108,9 +108,9 @@ export default async function Home() {
       <section className="on-dark grain relative isolate bg-char text-cream" aria-labelledby="fil">
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-10 sm:py-16 sm:py-24 lg:py-28 sm:px-6 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <RevealImg src={IMG.ube} alt="Illustrative image of ube French toast with berries and cream" sizes="(min-width:1024px) 40vw, 90vw" shape="arch" className="aspect-[4/5] w-full" speed={50} />
+            <RevealImg src={realPhotoFor("ube french toast") ?? IMG.ube} alt="Ube French toast with strawberries and whipped cream" illustrative={false} sizes="(min-width:1024px) 40vw, 90vw" shape="arch" className="aspect-[4/5] w-full" speed={50} />
             <div className="absolute -right-3 bottom-16 hidden w-44 rotate-3 sm:block lg:-right-10">
-              <RevealImg src={IMG.tapa} alt="Illustrative image of beef tapa" sizes="180px" className="aspect-square" rounded="rounded-[1.4rem]" speed={20} illustrative={false} />
+              <RevealImg src={realPhotoFor("beef tapa") ?? IMG.tapa} alt="Beef tapa with garlic rice and egg" sizes="180px" className="aspect-square" rounded="rounded-[1.4rem]" speed={20} illustrative={false} />
             </div>
             <div className="bob absolute -left-2 top-6 grid h-28 w-28 place-items-center rounded-full bg-sun p-3 text-center text-[0.72rem] font-black uppercase leading-tight text-white shadow-xl [--r:-8deg]">Sweet<br />& savoury<br />Filipino</div>
           </div>
@@ -142,7 +142,7 @@ export default async function Home() {
           <SplitHeading text="Scroll the table." className="display-xl mt-2 text-[clamp(3rem,8vw,6.5rem)]" />
         </div>
         <div className="mt-10"><ImageStrip items={STRIP} /></div>
-        <p className="mx-auto mt-4 max-w-7xl px-4 text-sm text-char/80 sm:px-6">Illustrative images. Photos of our own plates are coming.</p>
+        <p className="mx-auto mt-4 max-w-7xl px-4 text-sm text-char/80 sm:px-6">Some images are illustrative. Photos of our own plates are being added.</p>
       </section>
 
       {/* Story */}

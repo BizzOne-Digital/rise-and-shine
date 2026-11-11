@@ -1,14 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { submitBooking } from "@/app/actions";
+import { submitBooking, submitContact } from "@/app/actions";
 import { ActionForm, Field, describedBy, inputCls } from "./FormKit";
 import { formatTime12, hoursFor, slotsFor, todayEdmonton, type DayHours, type HolidayOverride, type BookingRules } from "@/lib/hours";
 
 export type FormLocation = { slug: string; name: string; weekly: DayHours[]; overrides: HolidayOverride[]; rules: BookingRules; acceptsBookings: boolean };
 
 export const BOOKING_NOTICE = "This is a booking request. Your reservation is confirmed only after the restaurant approves it.";
-const DB_MSG = "Online submissions are not available right now. Please call (403) 707-6529 or email rnsbreakfast@gmail.com.";
+const DB_MSG = "Online submissions are not available right now. Please call Forest Lawn (403) 271-5170 or The District (825) 205-6390, or email rnsbreakfast@gmail.com.";
 
 export function BookingForm({ locations, enabled, defaultLocation, idp = "" }: { locations: FormLocation[]; enabled: boolean; defaultLocation?: string; idp?: string }) {
   const bookable = locations.filter((l) => l.acceptsBookings);
@@ -55,6 +55,32 @@ export function BookingForm({ locations, enabled, defaultLocation, idp = "" }: {
               <textarea id={idp + "notes"} name="notes" rows={3} maxLength={500} className={inputCls} {...describedBy(idp + "notes", e.notes, "x")} />
             </Field>
             <p className="text-sm text-char/80">Requested times are not a live table check. The team will review your request and reply.</p>
+          </>
+        );
+      }}
+    </ActionForm>
+  );
+}
+
+export function ContactForm({ enabled, idp = "ct-" }: { enabled: boolean; idp?: string }) {
+  const [len, setLen] = useState(0);
+  const req = <span className="ml-1 text-sm font-semibold text-sun-red">(Required)</span>;
+  return (
+    <ActionForm action={submitContact} submitLabel="Send message" disabledReason={enabled ? undefined : DB_MSG} resetOnSuccess>
+      {(s) => {
+        const e = s.fieldErrors ?? {};
+        return (
+          <>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field idp={idp} label={<>First name{req}</>} name="firstName" error={e.firstName}><input id={idp + "firstName"} name="firstName" autoComplete="given-name" required className={inputCls} {...describedBy(idp + "firstName", e.firstName)} /></Field>
+              <Field idp={idp} label={<>Last name{req}</>} name="lastName" error={e.lastName}><input id={idp + "lastName"} name="lastName" autoComplete="family-name" required className={inputCls} {...describedBy(idp + "lastName", e.lastName)} /></Field>
+            </div>
+            <Field idp={idp} label={<>Email address{req}</>} name="email" error={e.email}><input id={idp + "email"} name="email" type="email" autoComplete="email" required className={inputCls} {...describedBy(idp + "email", e.email)} /></Field>
+            <Field idp={idp} label="Phone number" name="phone" error={e.phone}><input id={idp + "phone"} name="phone" type="tel" autoComplete="tel" className={inputCls} {...describedBy(idp + "phone", e.phone)} /></Field>
+            <Field idp={idp} label={<>Your message{req}</>} name="message" error={e.message} hint="Please let us know what's on your mind. Have a question for us? Ask away.">
+              <textarea id={idp + "message"} name="message" rows={6} maxLength={300} required placeholder="Type here" onChange={(ev) => setLen(ev.target.value.length)} className={inputCls} {...describedBy(idp + "message", e.message, "x")} />
+            </Field>
+            <p className="-mt-2 text-sm text-char/75">{len} of 300 max characters</p>
           </>
         );
       }}

@@ -12,18 +12,19 @@ const Arrow = ({ className = "" }: { className?: string }) => (
 
 // Desktop shows the three primary links from the design; the full list lives in the mobile menu and footer.
 const DESKTOP = [
-  { href: "/menu", label: "Menu" },
+  { href: "/menu", label: "Our Menu" },
   { href: "/about-us", label: "Our Story" },
-  { href: "/contact#locations", label: "Visit Us" },
-  { href: "/contact", label: "Contact Us" },
+  { href: "/contact", label: "Visit Us" },
+  { href: "/contact#contact-us", label: "Contact Us" },
 ];
 const ALL = [
-  { href: "/menu", label: "Menu" },
+  { href: "/menu", label: "Our Menu" },
   { href: "/about-us", label: "Our Story" },
   { href: "/services", label: "Services" },
   { href: "/testimonials", label: "Testimonials" },
   { href: "/our-team", label: "Our Team" },
-  { href: "/contact#locations", label: "Visit Us" },
+  { href: "/contact", label: "Visit Us" },
+  { href: "/contact#contact-us", label: "Contact Us" },
 ];
 
 export function Header() {
@@ -88,7 +89,7 @@ export function Header() {
               </ul>
               <div className="mt-8 flex flex-col gap-3">
                 <Link href="/book" className="btn-press rounded-md bg-char py-4 text-center font-serif2 text-lg font-semibold text-cream">Let’s do breakfast</Link>
-                <a href="tel:+14037076529" className="btn-press rounded-md border-2 border-white py-4 text-center font-serif2 text-lg font-semibold">Call (403) 707-6529</a>
+                <Link href="/contact#contact-us" className="btn-press rounded-md border-2 border-white py-4 text-center font-serif2 text-lg font-semibold">Contact us</Link>
               </div>
             </nav>
           </motion.div>

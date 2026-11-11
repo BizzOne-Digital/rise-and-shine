@@ -30,7 +30,7 @@ export default async function Services() {
       </PageHero>
       <section className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:py-20 sm:px-6">
         {services.length === 0 ? (
-          <p className="rounded-2xl bg-white p-8 text-lg font-bold">Our services list is being updated. Please call (403) 707-6529 to ask how we can help.</p>
+          <p className="rounded-2xl bg-white p-8 text-lg font-bold">Our services list is being updated. Please contact the team at either location to ask how we can help.</p>
         ) : (
           <ol className="divide-y-4 divide-char border-y-4 border-char">
             {services.map((s, i) => {

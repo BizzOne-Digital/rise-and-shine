@@ -4,7 +4,7 @@ import { Reveal } from "./Motion";
 import { SunArcs } from "./Art";
 import { RevealImg } from "./Media";
 
-export function PageHero({ eyebrow, title, children, tone = "orange", image }: { eyebrow: string; title: ReactNode; children?: ReactNode; tone?: "orange" | "dark" | "gold"; image?: { src: string; alt: string } }) {
+export function PageHero({ eyebrow, title, children, tone = "orange", image }: { eyebrow: string; title: ReactNode; children?: ReactNode; tone?: "orange" | "dark" | "gold"; image?: { src: string; alt: string; illustrative?: boolean } }) {
   const cls = tone === "orange" ? "bg-sun text-cream on-orange" : tone === "dark" ? "bg-char text-cream on-dark" : "bg-gold text-char";
   return (
     <section className={`${cls} grain relative isolate overflow-hidden`}>
@@ -17,7 +17,7 @@ export function PageHero({ eyebrow, title, children, tone = "orange", image }: {
         </div>
         {image && (
           <div className="relative mx-auto hidden w-full max-w-sm lg:block">
-            <RevealImg src={image.src} alt={image.alt} sizes="(min-width:1024px) 30vw, 0px" shape="arch" className="aspect-[4/5] w-full" speed={30} />
+            <RevealImg src={image.src} alt={image.alt} sizes="(min-width:1024px) 30vw, 0px" shape="arch" className="aspect-[4/5] w-full" speed={30} illustrative={image.illustrative ?? true} />
             <div className="bob absolute -left-6 bottom-10 grid h-24 w-24 place-items-center rounded-full bg-gold p-2 text-center text-[0.68rem] font-black uppercase leading-tight text-char shadow-lg [--r:-8deg]">Fresh<br />every<br />morning</div>
           </div>
         )}
@@ -44,7 +44,7 @@ export function Pill({ href, children, variant = "orange", external = false }: {
 export function PreviewBanner() {
   return (
     <p className="bg-char px-4 py-2 text-center text-sm font-bold text-gold" role="note">
-      Preview: live content and online forms are not switched on yet. Please call (403) 707-6529.
+      Preview: live content and online forms are not switched on yet. Please call Forest Lawn (403) 271-5170 or The District (825) 205-6390.
     </p>
   );
 }

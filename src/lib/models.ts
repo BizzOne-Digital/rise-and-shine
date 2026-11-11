@@ -90,6 +90,15 @@ export const BookingRequest = model("BookingRequest", new Schema({
   dedupeKey: { type: String, index: true },
 }, opts));
 
+export const ContactMessage = model("ContactMessage", new Schema({
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, default: "" },
+  message: { type: String, required: true },
+  status: { type: String, enum: ["new", "read", "replied"], default: "new", index: true },
+}, opts));
+
 export const Testimonial = model("Testimonial", new Schema({
   authorName: { type: String, required: true },
   body: { type: String, required: true },

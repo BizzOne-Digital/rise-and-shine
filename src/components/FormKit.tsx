@@ -10,7 +10,7 @@ type Action = (prev: State, fd: FormData) => Promise<State>;
 export const inputCls =
   "w-full rounded-xl border-2 border-char/25 bg-white px-4 py-3 text-base text-char placeholder:text-char/60 focus:border-sun focus:outline-none focus:ring-4 focus:ring-sun/25 aria-[invalid=true]:border-sun-red";
 
-export function Field({ label, name, error, hint, children, idp = "" }: { label: string; name: string; error?: string; hint?: string; children: ReactNode; idp?: string }) {
+export function Field({ label, name, error, hint, children, idp = "" }: { label: ReactNode; name: string; error?: string; hint?: string; children: ReactNode; idp?: string }) {
   const id = idp + name;
   return (
     <div>

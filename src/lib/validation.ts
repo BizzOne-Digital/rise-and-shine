@@ -33,6 +33,15 @@ export const bookingSchema = z.object({
   ...spamFields,
 });
 
+export const contactSchema = z.object({
+  firstName: text(1, 60, "First name"),
+  lastName: text(1, 60, "Last name"),
+  email: emailSchema,
+  phone: z.string().optional().default("").transform(clean).pipe(z.union([z.literal(""), z.string().regex(/^[0-9+()\-.\s]{7,20}$/, "Enter a valid phone number")])),
+  message: text(1, 300, "Message"),
+  ...spamFields,
+});
+
 export const loginSchema = z.object({ email: emailSchema, password: z.string().min(1).max(200) });
 
 export const passwordPolicy = z.string().min(12, "Use at least 12 characters").max(200);
