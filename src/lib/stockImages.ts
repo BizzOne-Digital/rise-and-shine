@@ -17,6 +17,8 @@ const CLASSIC: Record<string, string> = {
   "all meat omelette": "11-all-meat-omelette.png",
   "veggie omelette": "12-veggie-omelette.png",
   "ham & cheese omelette": "13-ham-cheese-omelette.png",
+  "longanisa": "/images/dishes/longanisa.jpg",
+  "sunrise steak": "/images/dishes/sunrise-steak.jpg",
   "avocado toast": "14-avocado-toast.png",
   "chorizo breakfast wrap": "15-chorizo-breakfast-wrap.png",
   "blt egg wrap": "16-blt-egg-wrap.png",

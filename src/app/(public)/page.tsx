@@ -26,7 +26,7 @@ const STRIP = [
   { src: IMG.pandan, alt: "Illustrative image of ricotta pancakes", label: "Ricotta pancake" },
   { src: realPhotoFor("pork tocino") ?? IMG.tocino, alt: "Pork tocino with garlic rice, egg and mango salsa", label: "Pork Tocino" },
   { src: IMG.ensaymada, alt: "Illustrative image of an ensaymada waffle", label: "Ensaymada waffle" },
-  { src: IMG.longanisa, alt: "Illustrative image of longanisa", label: "Longanisa" },
+  { src: realPhotoFor("longanisa") ?? IMG.longanisa, alt: "Longanisa with garlic rice, fried egg and mango salsa", label: "Longanisa" },
   { src: IMG.poutine, alt: "Illustrative image of breakfast poutine", label: "Breakfast poutine" },
   { src: IMG.avocado, alt: "Illustrative image of avocado toast", label: "Avocado toast" },
 ];

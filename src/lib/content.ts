@@ -9,7 +9,7 @@ export const BUSINESS = {
   // No single business line: guests call the location they are visiting.
   phone: "4032715170",
   phoneDisplay: "(403) 271-5170 (Forest Lawn) or (825) 205-6390 (The District)",
-  menuPdf: "/downloads/rise-n-shine-menu.pdf", // TODO: add the PDF to public/downloads/ (or set the menu PDF in admin settings)
+  menuPdf: "/downloads/rise-n-shine-menu.pdf",
   handle: "@rnsbreakfastplace",
   // Linked from the existing official website (re-verify before launch; see LAUNCH_CHECKLIST.md)
   social: {

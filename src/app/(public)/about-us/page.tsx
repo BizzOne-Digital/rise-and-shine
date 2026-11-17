@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <>
-      <PageHero image={{ src: IMG.interior, alt: "Illustrative image of a warm, sunlit cafe interior" }} eyebrow="About us" title={<>Breakfast with a <span className="text-gold">Filipino</span> heart.</>}>
+      <PageHero image={{ src: "/images/restaurant/chalkboard-wall.jpg", alt: "The chalkboard wall inside Rise N’ Shine: Good morning starts with coffee, all day breakfast, welcome home", illustrative: false }} eyebrow="About us" title={<>Breakfast with a <span className="text-gold">Filipino</span> heart.</>}>
         <p>A Calgary breakfast place where garlic rice shares the table with hashbrowns, and everybody is welcome.</p>
       </PageHero>
 
