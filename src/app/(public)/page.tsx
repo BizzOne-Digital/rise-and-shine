@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Hero } from "@/components/Hero";
+import { BreakfastSpecial } from "@/components/BreakfastSpecial";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { DishArt } from "@/components/Art";
 import { ImageStrip, Magnetic, RevealImg, SplitHeading, Tilt } from "@/components/Media";
@@ -87,6 +88,8 @@ export default async function Home() {
           ))}
         </Stagger>
       </section>
+
+      <div className="mt-14 sm:mt-20"><BreakfastSpecial /></div>
 
       {/* Signature dishes */}
       <section className="mx-auto max-w-7xl px-4 py-14 sm:py-20 lg:py-24 sm:px-6" aria-labelledby="sig">

@@ -52,9 +52,13 @@ export const IMG = {
 const REAL_PHOTOS: Record<string, string> = {
   "beef tapa": "/images/dishes/beef-tapa.jpg",
   "ube french toast": "/images/dishes/ube-french-toast.jpg",
-  "crispy sisig": "/images/dishes/crispy-sisig.png",
-  "pork tocino": "/images/dishes/pork-tocino.png",
-  "loco moco": "/images/dishes/loco-moco.png",
+  "loco moco": "/images/dishes/loco-moco.jpg",
+  "pork tocino": "/images/dishes/pork-tocino.jpg",
+  "crispy sisig": "/images/dishes/crispy-sisig.jpg",
+  "ham & cheese omelette": "/images/dishes/ham-and-cheese-omelette.jpg",
+  "breakfast poutine": "/images/dishes/breakfast-poutine.jpg",
+  "ensaymada waffle": "/images/dishes/ensaymada-waffle.jpg",
+  "daing na bangus": "/images/dishes/daing-na-bangus.jpg",
 };
 export const realPhotoFor = (name: string): string | null => REAL_PHOTOS[name.toLowerCase()] ?? null;
 
