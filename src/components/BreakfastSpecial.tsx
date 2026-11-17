@@ -15,7 +15,7 @@ export function BreakfastSpecial() {
           <p className="mt-3 max-w-md font-serif2 text-lg text-cream/90">Sausages, two sunny-side-up eggs, crispy potatoes, fresh tomato and toast.</p>
         </Reveal>
         <Reveal delay={0.1}>
-          <div className="relative aspect-[5/4] overflow-hidden rounded-[1.6rem] border-4 border-gold">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] border-4 border-gold">
             <Image src="/images/dishes/breakfast-special.jpg" alt="Breakfast special: sausages, two sunny-side-up eggs, crispy potatoes, tomato slices and toast" fill sizes="(min-width:768px) 45vw, 100vw" className="object-cover" />
           </div>
         </Reveal>
