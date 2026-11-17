@@ -63,6 +63,8 @@ const REAL_PHOTOS: Record<string, string> = {
   "spicy steak benedict": "/images/dishes/spicy-steak-benedict.jpg",
   "longga breakfast sandwich": "/images/dishes/longga-breakfast-sandwich.jpg",
   "blt egg wrap": "/images/dishes/blt-egg-wrap.jpg",
+  "avocado toast": "/images/dishes/avocado-toast.jpg",
+  "lemon ricotta pancake": "/images/dishes/lemon-ricotta-pancake.jpg",
 };
 export const realPhotoFor = (name: string): string | null => REAL_PHOTOS[name.toLowerCase()] ?? null;
 
