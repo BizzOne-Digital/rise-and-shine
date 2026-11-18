@@ -1,4 +1,3 @@
-import { IMG } from "@/lib/stockImages";
 import type { Metadata } from "next";
 import { PageHero, PreviewBanner } from "@/components/Bits";
 import { ContactForm } from "@/components/Forms";
@@ -21,7 +20,7 @@ export default async function Contact() {
   return (
     <>
       {source === "preview" && <PreviewBanner />}
-      <PageHero image={{ src: IMG.family, alt: "Illustrative image of a family sharing breakfast" }} eyebrow="Contact us" title={<>Come <span className="text-gold">hungry.</span></>}>
+      <PageHero image={{ src: "/images/restaurant/sign-wall-closeup.jpg", alt: "The Rise N’ Shine Breakfast Place sign above the yellow booths", illustrative: false }} eyebrow="Contact us" title={<>Come <span className="text-gold">hungry.</span></>}>
         <p>Serving up your favorite morning comforts across two Calgary locations. Reach out today to say hello or book a table.</p>
       </PageHero>
 

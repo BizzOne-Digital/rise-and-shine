@@ -29,7 +29,7 @@ export default function About() {
           <div className="grid grid-cols-2 gap-4">
             <RevealImg src={IMG.chef} alt="Illustrative image of a cook finishing a breakfast plate" sizes="(min-width:1024px) 20vw, 45vw" className="aspect-[3/4]" speed={25} />
             <RevealImg src={IMG.coffee} alt="Illustrative image of coffee and orange juice" sizes="(min-width:1024px) 20vw, 45vw" className="mt-10 aspect-[3/4]" speed={-25} />
-            <RevealImg src={IMG.family} alt="Illustrative image of a family sharing breakfast" sizes="(min-width:1024px) 40vw, 90vw" className="col-span-2 aspect-[16/9]" speed={20} />
+            <RevealImg src="/images/restaurant/dining-room-overhead.jpg" alt="Overhead view of the Rise N’ Shine dining room and chalkboard wall" illustrative={false} sizes="(min-width:1024px) 40vw, 90vw" className="col-span-2 aspect-[16/9]" speed={20} />
           </div>
           <p className="mt-3 text-sm">Illustrative images. Photos of our own plates and rooms are coming.</p>
         </div>

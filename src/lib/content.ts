@@ -18,10 +18,10 @@ export const BUSINESS = {
     tiktok: "https://tiktok.com/@rnsbreakfastplace",
   },
   googleReviewUrl: "https://g.page/r/CYRsgTkp6YKiEAE/review",
-  // One Google review link per location. TODO: replace with each location's own review link.
+  // One Google review link per location (provided by the client).
   reviewLinks: [
     { name: "Forest Lawn", url: "https://g.page/r/CYRsgTkp6YKiEAE/review" },
-    { name: "The District", url: "https://g.page/r/CYRsgTkp6YKiEAE/review" },
+    { name: "The District", url: "https://g.page/r/CZLtcWWMi9jdEAE/review" },
   ],
   servingSince: 2020, // About page: "proudly serving the Calgary area and beyond as early as 2020"
 };
