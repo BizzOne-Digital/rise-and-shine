@@ -17,8 +17,6 @@ const CLASSIC: Record<string, string> = {
   "all meat omelette": "11-all-meat-omelette.png",
   "veggie omelette": "12-veggie-omelette.png",
   "ham & cheese omelette": "13-ham-cheese-omelette.png",
-  "longanisa": "/images/dishes/longanisa.jpg",
-  "sunrise steak": "/images/dishes/sunrise-steak.jpg",
   "avocado toast": "14-avocado-toast.png",
   "chorizo breakfast wrap": "15-chorizo-breakfast-wrap.png",
   "blt egg wrap": "16-blt-egg-wrap.png",
@@ -67,6 +65,8 @@ const REAL_PHOTOS: Record<string, string> = {
   "blt egg wrap": "/images/dishes/blt-egg-wrap.jpg",
   "avocado toast": "/images/dishes/avocado-toast.jpg",
   "lemon ricotta pancake": "/images/dishes/lemon-ricotta-pancake.jpg",
+  "longanisa": "/images/dishes/longanisa.jpg",
+  "sunrise steak": "/images/dishes/sunrise-steak.jpg",
 };
 export const realPhotoFor = (name: string): string | null => REAL_PHOTOS[name.toLowerCase()] ?? null;
 
