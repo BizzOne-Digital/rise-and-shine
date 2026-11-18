@@ -12,11 +12,11 @@ export function BreakfastSpecial() {
           <p className="mt-5 font-nav text-xl font-bold sm:text-2xl">Monday to Friday, 7am to 9am</p>
           <p className="mt-1 font-serif2 text-lg text-cream/90">Dine in only.</p>
           <p className="display-xl mt-5 text-[clamp(3.6rem,9vw,6rem)] text-gold" aria-label="7 dollars and 99 cents">$7.99</p>
-          <p className="mt-3 max-w-md font-serif2 text-lg text-cream/90">Sausages, two sunny-side-up eggs, crispy potatoes, fresh tomato and toast.</p>
+          <p className="mt-3 max-w-md font-serif2 text-lg text-cream/90">Choice of maple pork sausage, bacon or ham, two eggs the way you like them, crispy potatoes, fresh tomatoes and toast.</p>
         </Reveal>
         <Reveal delay={0.1}>
           <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] border-4 border-gold">
-            <Image src="/images/dishes/breakfast-special.jpg" alt="Breakfast special: sausages, two sunny-side-up eggs, crispy potatoes, tomato slices and toast" fill sizes="(min-width:768px) 45vw, 100vw" className="object-cover" />
+            <Image src="/images/dishes/breakfast-special.jpg" alt="Breakfast special: sausages, two sunny-side-up eggs, crispy potatoes, tomato slices and toast on a wooden table" fill sizes="(min-width:768px) 45vw, 100vw" className="object-cover" />
           </div>
         </Reveal>
       </div>

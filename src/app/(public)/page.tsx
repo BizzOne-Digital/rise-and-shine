@@ -23,9 +23,9 @@ const FILIPINO_STORY: [string, string][] = [
 
 const STRIP = [
   { src: realPhotoFor("beef tapa") ?? IMG.tapa, alt: "Beef tapa with garlic rice, egg and mango salsa", label: "Beef Tapa" },
-  { src: IMG.pandan, alt: "Illustrative image of ricotta pancakes", label: "Ricotta pancake" },
+  { src: realPhotoFor("lemon ricotta pancake") ?? IMG.pandan, alt: "Lemon ricotta pancakes with strawberries, blueberries and granola", label: "Lemon Ricotta Pancake" },
   { src: realPhotoFor("pork tocino") ?? IMG.tocino, alt: "Pork tocino with garlic rice, egg and mango salsa", label: "Pork Tocino" },
-  { src: IMG.ensaymada, alt: "Illustrative image of an ensaymada waffle", label: "Ensaymada waffle" },
+  { src: realPhotoFor("ensaymada waffle") ?? IMG.ensaymada, alt: "Ensaymada waffle with sweet cream cheese and grated cheese", label: "Ensaymada Waffle" },
   { src: realPhotoFor("longanisa") ?? IMG.longanisa, alt: "Longanisa with garlic rice, fried egg and mango salsa", label: "Longanisa" },
   { src: IMG.poutine, alt: "Illustrative image of breakfast poutine", label: "Breakfast poutine" },
   { src: IMG.avocado, alt: "Illustrative image of avocado toast", label: "Avocado toast" },
