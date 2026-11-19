@@ -22,7 +22,8 @@
     "test": "vitest run",
     "seed": "tsx scripts/seed.ts",
     "create-admin": "tsx scripts/create-admin.ts",
-    "sync-client-changes": "tsx scripts/sync-client-changes.ts"
+    "sync-client-changes": "tsx scripts/sync-client-changes.ts",
+    "sync-menu-from-pdf": "tsx scripts/sync-menu-from-pdf.ts"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",

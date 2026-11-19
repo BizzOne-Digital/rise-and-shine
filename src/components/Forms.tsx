@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { submitBooking, submitContact } from "@/app/actions";
+import { submitApplication, submitBooking, submitContact } from "@/app/actions";
 import { ActionForm, Field, describedBy, inputCls } from "./FormKit";
 import { formatTime12, hoursFor, slotsFor, todayEdmonton, type DayHours, type HolidayOverride, type BookingRules } from "@/lib/hours";
 
@@ -81,6 +81,29 @@ export function ContactForm({ enabled, idp = "ct-" }: { enabled: boolean; idp?: 
               <textarea id={idp + "message"} name="message" rows={6} maxLength={300} required placeholder="Type here" onChange={(ev) => setLen(ev.target.value.length)} className={inputCls} {...describedBy(idp + "message", e.message, "x")} />
             </Field>
             <p className="-mt-2 text-sm text-char/75">{len} of 300 max characters</p>
+          </>
+        );
+      }}
+    </ActionForm>
+  );
+}
+
+export function WorkWithUsForm({ enabled, idp = "wk-" }: { enabled: boolean; idp?: string }) {
+  return (
+    <ActionForm action={submitApplication} submitLabel="Submit" disabledReason={enabled ? undefined : DB_MSG} resetOnSuccess>
+      {(s) => {
+        const e = s.fieldErrors ?? {};
+        return (
+          <>
+            <Field idp={idp} label="Full name" name="fullName" error={e.fullName}><input id={idp + "fullName"} name="fullName" autoComplete="name" required className={inputCls} {...describedBy(idp + "fullName", e.fullName)} /></Field>
+            <Field idp={idp} label="Email address" name="email" error={e.email}><input id={idp + "email"} name="email" type="email" autoComplete="email" required className={inputCls} {...describedBy(idp + "email", e.email)} /></Field>
+            <Field idp={idp} label="Question or message (optional)" name="message" error={e.message}>
+              <textarea id={idp + "message"} name="message" rows={4} maxLength={1000} className={inputCls} {...describedBy(idp + "message", e.message, "x")} />
+            </Field>
+            <Field idp={idp} label="Upload your resume" name="resume" error={e.resume} hint="PDF or Word file, up to 3 MB.">
+              <input id={idp + "resume"} name="resume" type="file" required accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                className={`${inputCls} file:mr-4 file:rounded-full file:border-0 file:bg-char file:px-4 file:py-2 file:font-bold file:text-cream`} {...describedBy(idp + "resume", e.resume, "x")} />
+            </Field>
           </>
         );
       }}

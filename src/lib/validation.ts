@@ -42,6 +42,29 @@ export const contactSchema = z.object({
   ...spamFields,
 });
 
+export const applicationSchema = z.object({
+  fullName: text(2, 80, "Full name"),
+  email: emailSchema,
+  message: optionalText(1000),
+  ...spamFields,
+});
+
+/** Resume rules for the "Work with us" form: PDF or Word, up to 3 MB, and the file contents must match the extension. */
+export const RESUME_MAX_BYTES = 3 * 1024 * 1024;
+export function checkResume(name: string, bytes: Uint8Array): string | null {
+  if (bytes.length === 0) return "Please attach your resume";
+  if (bytes.length > RESUME_MAX_BYTES) return "Your resume must be 3 MB or smaller";
+  const ext = name.toLowerCase().split(".").pop() ?? "";
+  const head = Array.from(bytes.slice(0, 4));
+  const isPdf = head[0] === 0x25 && head[1] === 0x50 && head[2] === 0x44 && head[3] === 0x46; // %PDF
+  const isZip = head[0] === 0x50 && head[1] === 0x4b; // docx is a zip
+  const isOle = head[0] === 0xd0 && head[1] === 0xcf && head[2] === 0x11 && head[3] === 0xe0; // legacy .doc
+  if (ext === "pdf" && isPdf) return null;
+  if (ext === "docx" && isZip) return null;
+  if (ext === "doc" && isOle) return null;
+  return "Please attach your resume as a PDF or Word file (.pdf, .doc or .docx)";
+}
+
 export const loginSchema = z.object({ email: emailSchema, password: z.string().min(1).max(200) });
 
 export const passwordPolicy = z.string().min(12, "Use at least 12 characters").max(200);

@@ -29,8 +29,13 @@ export function MenuExplorer({ categories, items, locations, pdfUrl }: { categor
 
   const grouped = categories.map((c) => ({ c, rows: view.filter((i) => i.categoryId === c.id) })).filter((g) => g.rows.length);
 
+  const dl = (
+    <a href={pdfUrl || BUSINESS.menuPdf} target="_blank" rel="noopener noreferrer" className="btn-press min-touch inline-flex shrink-0 items-center rounded-full bg-sun px-5 text-sm font-extrabold uppercase tracking-wide text-white">Download full menu<span className="sr-only"> (opens in a new tab)</span></a>
+  );
+
   return (
     <div>
+      <div className="mb-3 md:hidden">{dl}</div>
       <div className="sticky top-[72px] z-30 -mx-4 border-b border-char/10 bg-cream/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 md:flex-row md:items-center">
           <div className="flex min-w-0 items-center gap-2">
@@ -43,7 +48,7 @@ export function MenuExplorer({ categories, items, locations, pdfUrl }: { categor
               </button>
             ))}
           </div>
-          <a href={pdfUrl || BUSINESS.menuPdf} target="_blank" rel="noopener noreferrer" className="btn-press min-touch inline-flex shrink-0 items-center rounded-full bg-sun px-5 text-sm font-extrabold uppercase tracking-wide text-white">Download full menu<span className="sr-only"> (opens in a new tab)</span></a>
+          <div className="hidden md:block">{dl}</div>
           </div>
           <div className="flex flex-1 gap-2 md:justify-end">
             <label className="sr-only" htmlFor="menu-search">Search the menu</label>

@@ -6,7 +6,8 @@ const nextConfig = {
     localPatterns: [{ pathname: "/api/uploads/**" }, { pathname: "/images/**" }, { pathname: "/brand/**" }],
     formats: ["image/webp"],
   },
-  experimental: { serverActions: { bodySizeLimit: "1mb" } },
+  // 4mb: the "Work with us" form accepts a resume of up to 3 MB.
+  experimental: { serverActions: { bodySizeLimit: "4mb" } },
   // Keep old-site URLs working so search engines transfer their ranking (301 = permanent).
   // /menu, /about-us, /services and /contact keep the same paths on the new site.
   async redirects() {

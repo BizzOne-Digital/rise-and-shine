@@ -81,24 +81,17 @@ export function Hero() {
           <Stamp />
           <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}
             className="text-[0.72rem] font-semibold uppercase tracking-[0.3em] md:text-[0.8rem]">
-            Good mornings start here
+            Western + Filipino cuisine
           </motion.p>
 
-          <h1 id="hero-title" className="mt-6 font-cond font-black uppercase leading-[0.86] tracking-tight text-cream [font-size:clamp(3.2rem,19vw,9.5rem)] md:[font-size:clamp(5.4rem,9.4vw,10.6rem)]">
-            {["Wake up.", "Dig in.", "Shine on."].map((line, i) => (
-              <span key={line} className="block overflow-hidden pb-[0.04em]">
-                <motion.span className={`relative inline-block ${i === 2 ? "pb-4 text-gold" : ""}`}
-                  initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.3 + i * 0.12, duration: 0.85, ease }}>
-                  {line}
-                  {i === 2 && (
-                    <motion.svg viewBox="0 0 420 22" fill="none" aria-hidden="true" className="absolute -bottom-0 left-0 h-[0.12em] min-h-3 w-full"
-                      initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ delay: 1.0, duration: 0.9, ease }}>
-                      <motion.path d="M5 13C99 1 251 0 414 12" stroke="currentColor" strokeWidth="5" strokeLinecap="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 1.0, duration: 0.9, ease }} />
-                    </motion.svg>
-                  )}
-                </motion.span>
-              </span>
-            ))}
+          <h1 id="hero-title" className="mt-6 font-cond font-black uppercase leading-[0.86] tracking-tight text-cream [font-size:clamp(3rem,14vw,9rem)] md:[font-size:clamp(5rem,8.8vw,9.8rem)]">
+            <span className="block overflow-hidden pb-[0.04em]">
+              <motion.span className="inline-block" initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.3, duration: 0.85, ease }}>Good mornings</motion.span>
+            </span>
+            <span className="block overflow-hidden pb-[0.12em] pt-[0.06em]">
+              <motion.span className="inline-block font-script text-[1.15em] font-normal normal-case leading-[1.05] tracking-normal text-gold"
+                initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.42, duration: 0.85, ease }}>Start here.</motion.span>
+            </span>
           </h1>
 
           <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.85, duration: 0.7 }}
@@ -108,10 +101,10 @@ export function Hero() {
 
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.0, duration: 0.7 }} className="mt-9 flex flex-wrap items-center gap-x-10 gap-y-5">
             <Link href="/menu" className="btn-press group inline-flex items-center gap-10 rounded-md bg-sun px-7 py-5 font-serif2 text-lg font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-sun-red">
-              Explore the menu <span className="transition-transform group-hover:translate-x-1"><Arrow /></span>
+              View menu <span className="transition-transform group-hover:translate-x-1"><Arrow /></span>
             </Link>
             <Link href="/contact#locations" className="group inline-flex items-center gap-3 border-b border-cream py-1 font-serif2 text-lg font-medium text-cream">
-              Plan your visit <span className="transition-transform group-hover:translate-x-1"><Arrow /></span>
+              Find a location <span className="transition-transform group-hover:translate-x-1"><Arrow /></span>
             </Link>
           </motion.div>
         </div>

@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { BUSINESS, formatPhone, mapsDirectionsUrl, telHref } from "@/lib/content";
+import { BUSINESS, formatPhone, gmailComposeUrl, mapsDirectionsUrl, telHref } from "@/lib/content";
 import type { PubLocation } from "@/lib/data";
 import { Logo } from "./Logo";
+import { IconFacebook, IconInstagram, IconMail, IconTikTok } from "./Icons";
 
 export function Footer({ locations }: { locations: PubLocation[] }) {
   return (
@@ -36,15 +37,19 @@ export function Footer({ locations }: { locations: PubLocation[] }) {
               </li>
             ))}
           </ul>
-          <p className="mt-4 space-y-1">
-            <a href={`mailto:${BUSINESS.email}`} className="block min-h-[36px] hover:text-gold">{BUSINESS.email}</a>
+          <p className="mt-4">
+            <a href={gmailComposeUrl()} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[40px] items-center gap-3 hover:text-gold">
+              <IconMail size={22} className="shrink-0 text-gold" /><span className="lowercase">{BUSINESS.email}</span><span className="sr-only"> (opens Gmail in a new tab)</span>
+            </a>
           </p>
-          <ul className="mt-3 flex flex-wrap gap-2">
-            {[["Instagram", BUSINESS.social.instagram], ["Facebook", BUSINESS.social.facebook], ["TikTok", BUSINESS.social.tiktok]].map(([n, u]) => (
-              <li key={n}><a href={u} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center rounded-full border border-cream/40 px-4 text-sm font-bold hover:border-gold hover:text-gold">{n}<span className="sr-only"> (opens in a new tab)</span></a></li>
-            ))}
+          <ul className="mt-3 flex flex-wrap gap-3">
+            {[["Instagram", BUSINESS.social.instagram, IconInstagram], ["Facebook", BUSINESS.social.facebook, IconFacebook], ["TikTok", BUSINESS.social.tiktok, IconTikTok]].map(([n, u, Icon]) => {
+              const I = Icon as typeof IconInstagram;
+              return (
+                <li key={n as string}><a href={u as string} target="_blank" rel="noopener noreferrer" aria-label={`${n} (opens in a new tab)`} className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-cream/40 hover:border-gold hover:text-gold"><I size={22} /></a></li>
+              );
+            })}
           </ul>
-          <p className="mt-2 text-sm text-cream/80">{BUSINESS.handle}</p>
         </div>
       </div>
       <div className="border-t border-cream/15 px-4 py-5 text-center text-sm text-cream/80">

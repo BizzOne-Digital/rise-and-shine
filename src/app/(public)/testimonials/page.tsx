@@ -1,4 +1,3 @@
-import { IMG } from "@/lib/stockImages";
 import type { Metadata } from "next";
 import { PageHero, Pill, PreviewBanner } from "@/components/Bits";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
@@ -13,7 +12,7 @@ export default async function Testimonials() {
   return (
     <>
       {source === "preview" && <PreviewBanner />}
-      <PageHero image={{ src: IMG.coffee, alt: "Illustrative image of coffee and orange juice in morning light" }} eyebrow="Testimonials" title={<>Your words, <span className="text-gold">our fuel.</span></>}>
+      <PageHero image={{ src: "/images/restaurant/latte-orange-juice.jpg", alt: "A Rise N’ Shine latte mug and a glass of orange juice on a sunlit wooden table", illustrative: false }} eyebrow="Testimonials" title={<>Your words, <span className="text-gold">our fuel.</span></>}>
         <p>Feedback shared with us directly, shown only after our team has reviewed it.</p>
       </PageHero>
       <section className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:py-20 sm:px-6">
@@ -21,7 +20,6 @@ export default async function Testimonials() {
           <div className="rounded-[2rem] border-4 border-dashed border-char/40 bg-white p-10 text-center">
             <h2 className="display-lg text-4xl">No feedback published yet.</h2>
             <p className="mx-auto mt-3 max-w-xl text-lg">Had breakfast with us? We would love to hear about it on Google.</p>
-            <div className="mt-6 flex flex-wrap justify-center gap-3"><Pill href={BUSINESS.googleReviewUrl} external>Review us on Google</Pill></div>
           </div>
         ) : (
           <Stagger className="columns-1 gap-6 md:columns-2 lg:columns-3 [&>*]:mb-6">
@@ -37,8 +35,14 @@ export default async function Testimonials() {
           </Stagger>
         )}
       </section>
-      <section className="mx-auto max-w-3xl px-4 pb-14 text-center sm:px-6 sm:pb-20">
-        <Reveal><Pill href={BUSINESS.googleReviewUrl} external variant="dark">Leave a Google review</Pill></Reveal>
+      <section className="mx-auto max-w-3xl px-4 pb-14 text-center sm:px-6 sm:pb-20" aria-labelledby="leave-review">
+        <Reveal>
+          <h2 id="leave-review" className="display-lg text-4xl">Leave a Google review</h2>
+          <p className="mx-auto mt-2 max-w-xl text-lg">Choose the location you visited.</p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            {BUSINESS.reviewLinks.map((r) => <Pill key={r.name} href={r.url} external variant="orange">Review {r.name}</Pill>)}
+          </div>
+        </Reveal>
       </section>
     </>
   );

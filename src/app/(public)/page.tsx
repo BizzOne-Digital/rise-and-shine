@@ -27,8 +27,8 @@ const STRIP = [
   { src: realPhotoFor("pork tocino") ?? IMG.tocino, alt: "Pork tocino with garlic rice, egg and mango salsa", label: "Pork Tocino" },
   { src: realPhotoFor("ensaymada waffle") ?? IMG.ensaymada, alt: "Ensaymada waffle with sweet cream cheese and grated cheese", label: "Ensaymada Waffle" },
   { src: realPhotoFor("longanisa") ?? IMG.longanisa, alt: "Longanisa with garlic rice, fried egg and mango salsa", label: "Longanisa" },
-  { src: IMG.poutine, alt: "Illustrative image of breakfast poutine", label: "Breakfast poutine" },
-  { src: IMG.avocado, alt: "Illustrative image of avocado toast", label: "Avocado toast" },
+  { src: realPhotoFor("breakfast poutine") ?? IMG.poutine, alt: "Breakfast poutine with hashbrowns, poached eggs and hollandaise", label: "Breakfast Poutine" },
+  { src: realPhotoFor("avocado toast") ?? IMG.avocado, alt: "Avocado toast with eggs and a side salad", label: "Avocado Toast" },
 ];
 
 function Price({ cents }: { cents: number | null }) {
@@ -52,7 +52,7 @@ function SignatureTile({ item, big }: { item: PubItem; big?: boolean }) {
           <h3 className={`display-lg min-w-0 break-words ${big ? "text-4xl sm:text-5xl" : "text-3xl"}`}>{item.name}</h3>
           <Price cents={item.priceCents} />
         </div>
-        <p className="mt-1 line-clamp-2 text-base">{item.description}</p>
+        <p className="mt-1 text-base">{item.description}</p>
       </article>
     </Tilt>
   );
@@ -145,14 +145,13 @@ export default async function Home() {
           <SplitHeading text="Scroll the table." className="display-xl mt-2 text-[clamp(3rem,8vw,6.5rem)]" />
         </div>
         <div className="mt-10"><ImageStrip items={STRIP} /></div>
-        <p className="mx-auto mt-4 max-w-7xl px-4 text-sm text-char/80 sm:px-6">Some images are illustrative. Photos of our own plates are being added.</p>
       </section>
 
       {/* Story */}
       <section className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-10 sm:py-16 sm:py-24 lg:py-28 sm:px-6 lg:grid-cols-[1.05fr_1fr]" aria-labelledby="story">
         <div className="relative mx-auto grid w-full max-w-xl grid-cols-5 grid-rows-6 gap-4">
           <RevealImg src="/images/restaurant/dining-room.jpg" alt="The dining room at Rise N’ Shine with yellow booths, a wood feature wall and the coffee bar" illustrative={false} sizes="(min-width:1024px) 30vw, 70vw" className="col-span-3 row-span-5 aspect-[3/4]" speed={30} />
-          <RevealImg src={IMG.coffee} alt="Illustrative image of coffee and orange juice" sizes="(min-width:1024px) 20vw, 40vw" className="col-span-2 col-start-4 row-span-3 row-start-2 aspect-square" speed={-20} />
+          <RevealImg src="/images/restaurant/latte-orange-juice.jpg" alt="A Rise N’ Shine latte mug and a glass of orange juice on a sunlit wooden table" illustrative={false} position="50% 8%" sizes="(min-width:1024px) 20vw, 40vw" className="col-span-2 col-start-4 row-span-3 row-start-2 aspect-square" speed={-20} />
           <div className="bob col-span-2 col-start-4 row-start-5 grid place-items-center self-center rounded-[1.4rem] bg-sun p-4 text-center font-cond text-2xl font-extrabold uppercase leading-none text-white [--r:3deg]">Serving<br />Calgary<br />since 2020</div>
         </div>
         <div>

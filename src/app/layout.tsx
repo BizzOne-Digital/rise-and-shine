@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Barlow_Condensed, Montserrat, Outfit } from "next/font/google";
+import { Barlow_Condensed, Kaushan_Script, Montserrat, Outfit } from "next/font/google";
 import "./globals.css";
 import { MotionProvider } from "@/components/Motion";
 import { env } from "@/lib/env";
@@ -7,6 +7,7 @@ import { env } from "@/lib/env";
 const display = Barlow_Condensed({ subsets: ["latin"], weight: ["600", "700", "800", "900"], variable: "--font-display", display: "swap" });
 const nav = Montserrat({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-nav", display: "swap" });
 const body = Outfit({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const script = Kaushan_Script({ subsets: ["latin"], weight: "400", variable: "--font-script", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.siteUrl),
@@ -19,7 +20,7 @@ export const viewport: Viewport = { themeColor: "#FF4D00", width: "device-width"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-CA" className={`${display.variable} ${body.variable} ${nav.variable}`}>
+    <html lang="en-CA" className={`${display.variable} ${body.variable} ${nav.variable} ${script.variable}`}>
       <body>
         {/* If scripts fail to run, reveal-on-scroll content must still be visible */}
         <noscript><style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style></noscript>

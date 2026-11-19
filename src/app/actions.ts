@@ -3,8 +3,8 @@
 import { createHash } from "crypto";
 import { connectDB } from "@/lib/db";
 import { env } from "@/lib/env";
-import { BookingRequest, ContactMessage, Location, SiteSettings } from "@/lib/models";
-import { bookingSchema, contactSchema, looksLikeSpam } from "@/lib/validation";
+import { BookingRequest, ContactMessage, JobApplication, Location, SiteSettings } from "@/lib/models";
+import { applicationSchema, bookingSchema, checkResume, contactSchema, looksLikeSpam } from "@/lib/validation";
 import { DEFAULT_RULES, edmontonToUtc, validateBookingWindow, weekdayOf, type HoursConfig } from "@/lib/hours";
 import { clientKey, rateLimit } from "@/lib/ratelimit";
 import { notifyStaff } from "@/lib/notify";
@@ -13,6 +13,8 @@ import { BUSINESS } from "@/lib/content";
 export type FormState = { ok?: boolean; message?: string; error?: string; fieldErrors?: Record<string, string> };
 
 const UNAVAILABLE = `Online submissions are not available right now. Please call ${BUSINESS.phoneDisplay} or email ${BUSINESS.email}.`;
+/** Shown when a submission was saved but the email to the team did not go out (e.g. email is not set up yet). */
+const NOT_EMAILED = `We saved your submission, but we could not email it to the team just right now. Please email ${BUSINESS.email} or call ${BUSINESS.phoneDisplay} so we do not miss you.`;
 const hash = (...p: (string | number)[]) => createHash("sha256").update(p.join("|").toLowerCase()).digest("hex");
 
 function fieldErrors(issues: { path: PropertyKey[]; message: string }[]) {
@@ -66,9 +68,11 @@ export async function submitBooking(_prev: FormState, fd: FormData): Promise<For
         date: d.date, time: d.time, startsAt: edmontonToUtc(d.date, d.time), notes: d.notes, status: "pending",
         history: [{ status: "pending", at: new Date(), by: "customer", note: "Request submitted" }], dedupeKey,
       });
-      void notifyStaff(`New booking request: ${loc.name}, ${d.date} ${d.time}`, [
-        `Location: ${loc.name}`, `Name: ${d.name}`, `Party of ${d.partySize}`, `When: ${d.date} ${d.time}`, `Booking id: ${created._id}`,
-      ]);
+      const delivered = await notifyStaff(`New booking request: ${loc.name}, ${d.date} ${d.time}`, [
+        `Location: ${loc.name}`, `Name: ${d.name}`, `Email: ${d.email}`, `Phone: ${d.phone}`, `Party of ${d.partySize}`, `When: ${d.date} ${d.time}`,
+        d.notes ? `Notes: ${d.notes}` : "Notes: none", `Booking id: ${created._id}`,
+      ], { replyTo: d.email });
+      if (!delivered) return { error: NOT_EMAILED };
     }
     return {
       ok: true,
@@ -90,12 +94,47 @@ export async function submitContact(_prev: FormState, fd: FormData): Promise<For
   try {
     await connectDB();
     const saved = await ContactMessage.create({ firstName: d.firstName, lastName: d.lastName, email: d.email, phone: d.phone, message: d.message });
-    void notifyStaff(`New website message from ${d.firstName} ${d.lastName}`, [
+    const delivered = await notifyStaff(`New website message from ${d.firstName} ${d.lastName}`, [
       `Name: ${d.firstName} ${d.lastName}`, `Email: ${d.email}`, d.phone ? `Phone: ${d.phone}` : "Phone: not provided", "", d.message, "", `Message id: ${saved._id}`,
-    ]);
+    ], { replyTo: d.email });
+    if (!delivered) return { error: NOT_EMAILED };
     return { ok: true, message: "Salamat! Your message has been sent. The team will get back to you soon." };
   } catch (e) {
     console.error("[submitContact]", (e as Error).message);
     return { error: `We could not send your message. Please try again, or call ${BUSINESS.phoneDisplay}.` };
+  }
+}
+
+export async function submitApplication(_prev: FormState, fd: FormData): Promise<FormState> {
+  const parsed = applicationSchema.safeParse({ fullName: fd.get("fullName"), email: fd.get("email"), message: fd.get("message") ?? "", website: fd.get("website") ?? "", ts: fd.get("ts") ?? 0 });
+  const errs = parsed.success ? {} : fieldErrors(parsed.error.issues);
+  const file = fd.get("resume");
+  let bytes = new Uint8Array(0);
+  let fileName = "";
+  if (file && typeof file === "object" && "arrayBuffer" in file) {
+    fileName = String((file as File).name || "resume").replace(/[^\w.\- ]+/g, "_").slice(0, 120);
+    bytes = new Uint8Array(await (file as File).arrayBuffer());
+  }
+  const resumeProblem = checkResume(fileName, bytes);
+  if (resumeProblem) errs.resume = resumeProblem;
+  if (!parsed.success || resumeProblem) return { error: "Please fix the highlighted fields.", fieldErrors: errs };
+  const d = parsed.data;
+  if (looksLikeSpam(d)) return { error: "We could not send that form. Please reload the page and try again." };
+  const blocked = await guard("application", 3, 3600);
+  if (blocked) return { error: blocked };
+  try {
+    await connectDB();
+    const saved = await JobApplication.create({
+      fullName: d.fullName, email: d.email, message: d.message, resumeName: fileName,
+      resumeType: fileName.toLowerCase().endsWith(".pdf") ? "application/pdf" : "application/msword", resume: Buffer.from(bytes),
+    });
+    const delivered = await notifyStaff(`Work with us: application from ${d.fullName}`, [
+      `Name: ${d.fullName}`, `Email: ${d.email}`, "", d.message || "(no message)", "", `Resume attached: ${fileName}`, `Application id: ${saved._id}`,
+    ], { replyTo: d.email, attachments: [{ filename: fileName, content: Buffer.from(bytes) }] });
+    if (!delivered) return { error: NOT_EMAILED };
+    return { ok: true, message: "Thank you! Your application and resume have been sent to the team. We will be in touch if there is a fit." };
+  } catch (e) {
+    console.error("[submitApplication]", (e as Error).message);
+    return { error: `We could not send your application. Please try again, or email ${BUSINESS.email}.` };
   }
 }

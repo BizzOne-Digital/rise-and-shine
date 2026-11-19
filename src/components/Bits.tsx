@@ -4,7 +4,7 @@ import { Reveal } from "./Motion";
 import { SunArcs } from "./Art";
 import { RevealImg } from "./Media";
 
-export function PageHero({ eyebrow, title, children, tone = "orange", image }: { eyebrow: string; title: ReactNode; children?: ReactNode; tone?: "orange" | "dark" | "gold"; image?: { src: string; alt: string; illustrative?: boolean } }) {
+export function PageHero({ eyebrow, title, children, tone = "orange", image }: { eyebrow: string; title: ReactNode; children?: ReactNode; tone?: "orange" | "dark" | "gold"; image?: { src: string; alt: string; illustrative?: boolean; landscape?: boolean } }) {
   const cls = tone === "orange" ? "bg-sun text-cream on-orange" : tone === "dark" ? "bg-char text-cream on-dark" : "bg-gold text-char";
   return (
     <section className={`${cls} grain relative isolate overflow-hidden`}>
@@ -16,8 +16,8 @@ export function PageHero({ eyebrow, title, children, tone = "orange", image }: {
           {children && <Reveal delay={0.16}><div className="mt-6 max-w-2xl font-serif2 text-xl sm:text-2xl">{children}</div></Reveal>}
         </div>
         {image && (
-          <div className="relative mx-auto hidden w-full max-w-sm lg:block">
-            <RevealImg src={image.src} alt={image.alt} sizes="(min-width:1024px) 30vw, 0px" shape="arch" className="aspect-[4/5] w-full" speed={30} illustrative={image.illustrative ?? true} />
+          <div className={`relative mx-auto hidden w-full lg:block ${image.landscape ? "max-w-lg" : "max-w-sm"}`}>
+            <RevealImg src={image.src} alt={image.alt} sizes="(min-width:1024px) 34vw, 0px" shape={image.landscape ? undefined : "arch"} className={`w-full ${image.landscape ? "aspect-[4/3]" : "aspect-[4/5]"}`} speed={image.landscape ? 12 : 30} illustrative={image.illustrative ?? true} />
             <div className="bob absolute -left-6 bottom-10 grid h-24 w-24 place-items-center rounded-full bg-gold p-2 text-center text-[0.68rem] font-black uppercase leading-tight text-char shadow-lg [--r:-8deg]">Fresh<br />every<br />morning</div>
           </div>
         )}

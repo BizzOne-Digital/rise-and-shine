@@ -16,6 +16,7 @@ const config: Config = {
         cond: ["var(--font-display)", "Impact", "sans-serif"],
         serif2: ["var(--font-body)", "system-ui", "sans-serif"],
         nav: ["var(--font-nav)", "system-ui", "sans-serif"],
+        script: ["var(--font-script)", "cursive"],
       },
     },
   },

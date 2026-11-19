@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { PageHero, PreviewBanner } from "@/components/Bits";
-import { ContactForm } from "@/components/Forms";
+import { ContactForm, WorkWithUsForm } from "@/components/Forms";
+import { IconFacebook, IconInstagram, IconMail } from "@/components/Icons";
 import { Pill } from "@/components/Bits";
 import { LocationCards } from "@/components/LocationCards";
 import { Reveal } from "@/components/Motion";
 import { getLocations, getSettings } from "@/lib/data";
-import { BUSINESS } from "@/lib/content";
+import { BUSINESS, gmailComposeUrl } from "@/lib/content";
 import { env } from "@/lib/env";
 
 export const metadata: Metadata = {
@@ -45,27 +46,31 @@ export default async function Contact() {
             <h3 className="mt-12 text-sm font-extrabold uppercase tracking-[0.18em] text-gold">Ways to reach us</h3>
             <ul className="mt-5 space-y-6">
               <li className="flex items-start gap-4">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="mt-1 shrink-0 text-gold"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+                <IconMail size={30} className="mt-1 shrink-0 text-gold" />
                 <div>
                   <p className="text-sm font-extrabold uppercase tracking-wider text-gold">General inquiries</p>
-                  <a href={`mailto:${BUSINESS.email}`} className="text-xl font-bold [overflow-wrap:anywhere] hover:text-gold">Rnsbreakfast@gmail.com</a>
+                  <a href={gmailComposeUrl()} target="_blank" rel="noopener noreferrer" className="text-xl font-bold lowercase underline decoration-gold/40 underline-offset-4 [overflow-wrap:anywhere] hover:text-gold hover:decoration-gold">{BUSINESS.email}<span className="sr-only"> (opens Gmail in a new tab)</span></a>
                 </div>
               </li>
               <li className="flex items-start gap-4">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="mt-1 shrink-0 text-gold"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21h3z" /></svg>
+                <IconFacebook size={30} className="mt-1 shrink-0 text-gold" />
                 <div>
                   <p className="text-sm font-extrabold uppercase tracking-wider text-gold">Facebook</p>
-                  <a href={BUSINESS.social.facebook} target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-gold">@Rnsbreakfastplace<span className="sr-only"> (opens in a new tab)</span></a>
+                  <a href={BUSINESS.social.facebook} target="_blank" rel="noopener noreferrer" className="text-xl font-bold lowercase underline decoration-gold/40 underline-offset-4 [overflow-wrap:anywhere] hover:text-gold hover:decoration-gold">{BUSINESS.handle}<span className="sr-only"> (opens in a new tab)</span></a>
                 </div>
               </li>
               <li className="flex items-start gap-4">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="mt-1 shrink-0 text-gold"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor" /></svg>
+                <IconInstagram size={30} className="mt-1 shrink-0 text-gold" />
                 <div>
                   <p className="text-sm font-extrabold uppercase tracking-wider text-gold">Instagram</p>
-                  <a href={BUSINESS.social.instagram} target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-gold">@RNSBREAKFASTPLACE<span className="sr-only"> (opens in a new tab)</span></a>
+                  <a href={BUSINESS.social.instagram} target="_blank" rel="noopener noreferrer" className="text-xl font-bold lowercase underline decoration-gold/40 underline-offset-4 [overflow-wrap:anywhere] hover:text-gold hover:decoration-gold">{BUSINESS.handle}<span className="sr-only"> (opens in a new tab)</span></a>
                 </div>
               </li>
             </ul>
+
+            <h3 id="work-with-us" className="mt-12 scroll-mt-24 text-sm font-extrabold uppercase tracking-[0.18em] text-gold">Work with us</h3>
+            <p className="mt-3 font-serif2 text-xl">Want to join the Rise N’ Shine team? Send us your details and your resume.</p>
+            <div className="mt-5 rounded-[1.6rem] bg-cream p-6 text-char"><WorkWithUsForm enabled={dbOk} /></div>
           </Reveal>
         </div>
       </section>

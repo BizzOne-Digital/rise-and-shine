@@ -67,6 +67,13 @@ const REAL_PHOTOS: Record<string, string> = {
   "lemon ricotta pancake": "/images/dishes/lemon-ricotta-pancake.jpg",
   "longanisa": "/images/dishes/longanisa.jpg",
   "sunrise steak": "/images/dishes/sunrise-steak.jpg",
+  "fried pork belly": "/images/dishes/fried-pork-belly.jpg",
+  "grilled chicken benedict": "/images/dishes/grilled-chicken-benedict.jpg",
+  "crispy chicken wrap": "/images/dishes/crispy-chicken-wrap.jpg",
+  "banana walnut waffle": "/images/dishes/banana-walnut-waffle.jpg",
+  "summer salad": "/images/dishes/summer-salad.jpg",
+  "leche flan": "/images/dishes/leche-flan.jpg",
+  "ube bread pudding": "/images/dishes/ube-bread-pudding.jpg",
 };
 export const realPhotoFor = (name: string): string | null => REAL_PHOTOS[name.toLowerCase()] ?? null;
 

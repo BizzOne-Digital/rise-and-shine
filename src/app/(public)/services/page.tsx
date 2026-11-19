@@ -1,4 +1,3 @@
-import { IMG } from "@/lib/stockImages";
 import type { Metadata } from "next";
 import { PageHero, Pill, PreviewBanner } from "@/components/Bits";
 import Image from "next/image";
@@ -25,7 +24,7 @@ export default async function Services() {
   return (
     <>
       {source === "preview" && <PreviewBanner />}
-      <PageHero image={{ src: IMG.catering, alt: "Illustrative image of a catering breakfast spread" }} eyebrow="Services" title={<>However you <span className="text-gold">gather.</span></>}>
+      <PageHero image={{ src: "/images/restaurant/dining-room-chalkboard.jpg", alt: "The Rise N’ Shine dining room with the chalkboard wall, yellow booths and coffee bar", illustrative: false, landscape: true }} eyebrow="Services" title={<>However you <span className="text-gold">gather.</span></>}>
         <p>Dine in, bring the family, or let us cook for your event. A table booking and a catering inquiry are different things, so each has its own form.</p>
       </PageHero>
       <section className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:py-20 sm:px-6">

@@ -99,6 +99,16 @@ export const ContactMessage = model("ContactMessage", new Schema({
   status: { type: String, enum: ["new", "read", "replied"], default: "new", index: true },
 }, opts));
 
+export const JobApplication = model("JobApplication", new Schema({
+  fullName: { type: String, required: true },
+  email: { type: String, required: true },
+  message: { type: String, default: "" },
+  resumeName: { type: String, required: true },
+  resumeType: { type: String, default: "" },
+  resume: { type: Buffer, required: true },
+  status: { type: String, enum: ["new", "reviewed"], default: "new", index: true },
+}, opts));
+
 export const Testimonial = model("Testimonial", new Schema({
   authorName: { type: String, required: true },
   body: { type: String, required: true },

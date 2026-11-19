@@ -14,6 +14,7 @@ const Arrow = ({ className = "" }: { className?: string }) => (
 const DESKTOP = [
   { href: "/menu", label: "Our Menu" },
   { href: "/about-us", label: "Our Story" },
+  { href: "/services", label: "Our Services" },
   { href: "/contact", label: "Visit Us" },
   { href: "/contact#contact-us", label: "Contact Us" },
 ];
@@ -32,25 +33,34 @@ export function Header() {
   const pathname = usePathname();
 
   useEffect(() => setOpen(false), [pathname]);
+  // Lock the page behind the open mobile menu. "overflow: hidden" alone is ignored by iOS Safari, so the body is pinned
+  // in place (and the scroll position restored on close). The header is fixed, so the Close button always stays on screen.
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    const y = window.scrollY;
+    const s = document.body.style;
+    const prev = { position: s.position, top: s.top, left: s.left, right: s.right, width: s.width };
+    s.position = "fixed"; s.top = `-${y}px`; s.left = "0"; s.right = "0"; s.width = "100%";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      s.position = prev.position; s.top = prev.top; s.left = prev.left; s.right = prev.right; s.width = prev.width;
+      window.scrollTo({ top: y, behavior: "instant" as ScrollBehavior });
     };
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 bg-black text-white">
+    <>
+    <div aria-hidden className="h-[72px] lg:h-[84px]" />
+    <header className="fixed inset-x-0 top-0 z-50 bg-black text-white">
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-md focus:bg-char focus:px-4 focus:py-2 focus:text-cream">
         Skip to content
       </a>
       <div className="mx-auto flex h-[72px] max-w-[1800px] items-center justify-between gap-6 pr-[4.5%] pl-[2%] lg:h-[84px]">
         <Link href="/" aria-label="Rise N’ Shine Breakfast Place, home" className="shrink-0"><Logo plain /></Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-8 font-nav text-[0.95rem] font-bold uppercase tracking-wide lg:flex xl:gap-12">
+        <nav aria-label="Main" className="hidden items-center gap-5 font-nav text-[0.82rem] font-bold uppercase tracking-wide lg:flex xl:gap-9 xl:text-[0.95rem]">
           {DESKTOP.map((n) => (
             <Link key={n.href} href={n.href} aria-current={pathname === n.href ? "page" : undefined}
               className="group relative py-3 font-bold text-white">
@@ -60,7 +70,7 @@ export function Header() {
           ))}
         </nav>
 
-        <Link href="/book" className="btn-press group hidden items-center gap-4 rounded-md bg-[#E6A900] px-6 py-3 font-nav text-[0.95rem] font-bold text-char transition-colors hover:bg-[#CF9500] lg:inline-flex">
+        <Link href="/book" className="btn-press group hidden items-center gap-3 rounded-md bg-[#E6A900] px-4 py-3 font-nav text-[0.82rem] font-bold text-char transition-colors hover:bg-[#CF9500] lg:inline-flex xl:gap-4 xl:px-6 xl:text-[0.95rem]">
           Let’s do breakfast <Arrow className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </Link>
 
@@ -76,14 +86,14 @@ export function Header() {
 
       <AnimatePresence>
         {open && (
-          <motion.div id="mobile-nav" className="on-orange fixed inset-x-0 bottom-0 top-[72px] z-40 overflow-y-auto bg-sun lg:hidden"
+          <motion.div id="mobile-nav" className="on-orange fixed inset-x-0 bottom-0 top-[72px] z-40 overflow-y-auto overscroll-contain bg-sun lg:hidden"
             initial={{ clipPath: "circle(0% at 90% 0%)" }} animate={{ clipPath: "circle(150% at 90% 0%)" }} exit={{ clipPath: "circle(0% at 90% 0%)" }}
             transition={{ duration: 0.55, ease: [0.2, 0.7, 0.2, 1] }}>
             <nav aria-label="Mobile" className="flex min-h-full flex-col justify-between px-6 pb-10 pt-8 text-white">
               <ul>
                 {[{ href: "/", label: "Home" }, ...ALL].map((n, i) => (
                   <motion.li key={n.href} initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.12 + i * 0.05 }}>
-                    <Link href={n.href} className="display-lg block border-b border-white/25 py-3 text-[2.6rem]">{n.label}</Link>
+                    <Link href={n.href} className="block border-b border-white/25 py-4 font-nav text-lg font-bold uppercase tracking-wide">{n.label}</Link>
                   </motion.li>
                 ))}
               </ul>
@@ -96,5 +106,6 @@ export function Header() {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 }
