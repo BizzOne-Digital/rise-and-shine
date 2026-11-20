@@ -6,7 +6,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { DishArt } from "@/components/Art";
 import { ImageStrip, Magnetic, RevealImg, SplitHeading, Tilt } from "@/components/Media";
 import { LocationCards } from "@/components/LocationCards";
-import { JsonLd, Pill, PreviewBanner } from "@/components/Bits";
+import { JsonLd, Pill, PreviewBanner, Stars } from "@/components/Bits";
 import { getLocations, getMenu, getServices, getSettings, getTestimonials, type PubItem } from "@/lib/data";
 import { formatCAD } from "@/lib/money";
 import { restaurantJsonLd } from "@/lib/jsonld";
@@ -111,7 +111,7 @@ export default async function Home() {
       <section className="on-dark grain relative isolate bg-char text-cream" aria-labelledby="fil">
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-10 sm:py-16 sm:py-24 lg:py-28 sm:px-6 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <RevealImg src={realPhotoFor("ube french toast") ?? IMG.ube} alt="Ube French toast with strawberries and whipped cream" illustrative={false} sizes="(min-width:1024px) 40vw, 90vw" shape="arch" className="aspect-[4/5] w-full" speed={50} />
+            <RevealImg src="/images/dishes/ube-french-toast-portrait.jpg" alt="Ube French toast with strawberries and whipped cream, a latte and orange juice" illustrative={false} sizes="(min-width:1024px) 40vw, 90vw" shape="arch" className="aspect-[4/5] w-full" speed={50} />
             <div className="absolute -right-3 bottom-16 hidden w-44 rotate-3 sm:block lg:-right-10">
               <RevealImg src={realPhotoFor("beef tapa") ?? IMG.tapa} alt="Beef tapa with garlic rice and egg" sizes="180px" className="aspect-square" rounded="rounded-[1.4rem]" speed={20} illustrative={false} />
             </div>
@@ -170,11 +170,11 @@ export default async function Home() {
           <Stagger className="mt-12 divide-y-2 divide-white/30 border-y-2 border-white/30">
             {services.slice(0, 5).map((s, i) => (
               <StaggerItem key={s.id}>
-                <Link href="/services" className="group grid items-center gap-4 py-6 sm:grid-cols-[4rem_1fr_9rem_auto]">
+                <Link href="/services" className="group grid items-center gap-4 py-6 sm:grid-cols-[4rem_1fr_13rem_auto]">
                   <span className="display-lg text-4xl text-gold" aria-hidden>{String(i + 1).padStart(2, "0")}</span>
                   <span><span className="display-lg block text-4xl transition-transform duration-300 group-hover:translate-x-2 sm:text-5xl">{s.title}</span><span className="mt-1 block max-w-2xl text-lg">{s.summary}</span></span>
-                  <span className="relative hidden h-24 w-36 overflow-hidden rounded-2xl border-2 border-cream/80 sm:block">
-                    <Image src={serviceImage(s.slug)} alt="" fill sizes="144px" className="zoom-img object-cover transition-transform duration-500 group-hover:scale-110" />
+                  <span className="relative hidden h-32 w-52 overflow-hidden rounded-2xl border-2 border-cream/80 sm:block">
+                    <Image src={serviceImage(s.slug)} alt="" fill sizes="208px" className="zoom-img object-cover transition-transform duration-500 group-hover:scale-110" />
                   </span>
                   <span aria-hidden className="hidden text-5xl transition-transform duration-300 group-hover:translate-x-2 sm:block">→</span>
                 </Link>
@@ -194,6 +194,7 @@ export default async function Home() {
             {testimonials.map((t) => (
               <StaggerItem key={t.id}>
                 <figure className="h-full rounded-[1.6rem] border-4 border-char bg-white p-6">
+                  <Stars rating={t.rating} />
                   <blockquote className="font-serif2 text-lg leading-relaxed">“{t.body}”</blockquote>
                   <figcaption className="mt-4 font-extrabold">{t.authorName}{t.visitedLocation ? `, ${t.visitedLocation}` : ""}</figcaption>
                 </figure>

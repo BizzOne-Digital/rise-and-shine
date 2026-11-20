@@ -1,4 +1,3 @@
-import { IMG } from "@/lib/stockImages";
 import type { Metadata } from "next";
 import { PageHero, Pill } from "@/components/Bits";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
@@ -30,7 +29,7 @@ export default function About() {
         </Reveal>
         <div className="relative lg:col-span-5">
           <div className="grid grid-cols-2 gap-4">
-            <RevealImg src={IMG.chef} alt="Illustrative image of a cook finishing a breakfast plate" sizes="(min-width:1024px) 20vw, 45vw" className="aspect-[3/4]" speed={25} />
+            <RevealImg src="/images/restaurant/chef-philly-benedict.jpg" alt="A cook finishing a Philly steak benedict with fresh parsley" illustrative={false} sizes="(min-width:1024px) 20vw, 45vw" className="aspect-[3/4]" speed={25} />
             <RevealImg src="/images/restaurant/latte-orange-juice.jpg" alt="A Rise N’ Shine latte mug and a glass of orange juice on a sunlit wooden table" illustrative={false} sizes="(min-width:1024px) 20vw, 45vw" className="mt-10 aspect-[3/4]" speed={-25} />
             <RevealImg src="/images/restaurant/dining-room-overhead.jpg" alt="Overhead view of the Rise N’ Shine dining room and chalkboard wall" illustrative={false} sizes="(min-width:1024px) 40vw, 90vw" className="col-span-2 aspect-[16/9]" speed={20} />
           </div>

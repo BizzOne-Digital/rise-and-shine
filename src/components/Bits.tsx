@@ -27,6 +27,14 @@ export function PageHero({ eyebrow, title, children, tone = "orange", image }: {
   );
 }
 
+export function Stars({ rating = 5, className = "" }: { rating?: number; className?: string }) {
+  return (
+    <p role="img" aria-label={`${rating} out of 5 stars`} className={`mb-3 text-2xl leading-none tracking-[0.15em] text-gold ${className}`}>
+      {"★".repeat(rating)}<span className="text-char/20">{"★".repeat(5 - rating)}</span>
+    </p>
+  );
+}
+
 export function Pill({ href, children, variant = "orange", external = false }: { href: string; children: ReactNode; variant?: "orange" | "dark" | "cream" | "outline"; external?: boolean }) {
   const v = {
     orange: "bg-sun text-white shadow-[0_4px_0_#C93A00]",

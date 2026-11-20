@@ -24,7 +24,7 @@ export default async function Services() {
   return (
     <>
       {source === "preview" && <PreviewBanner />}
-      <PageHero image={{ src: "/images/restaurant/dining-room-chalkboard.jpg", alt: "The Rise N’ Shine dining room with the chalkboard wall, yellow booths and coffee bar", illustrative: false, landscape: true }} eyebrow="Services" title={<>However you <span className="text-gold">gather.</span></>}>
+      <PageHero image={{ src: "/images/restaurant/services-dining.jpg", alt: "Guests enjoying breakfast in the Rise N’ Shine dining room", illustrative: false, landscape: true }} eyebrow="Services" title={<>However you <span className="text-gold">gather.</span></>}>
         <p>Dine in, bring the family, or let us cook for your event. A table booking and a catering inquiry are different things, so each has its own form.</p>
       </PageHero>
       <section className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:py-20 sm:px-6">
@@ -36,14 +36,14 @@ export default async function Services() {
               const c = CTA[s.cta] ?? CTA.catering;
               return (
                 <Reveal as="li" key={s.id} delay={0.03}>
-                  <div className="grid items-center gap-4 py-8 md:grid-cols-[5rem_1.3fr_12rem_auto]">
+                  <div className="grid items-center gap-4 py-8 md:grid-cols-[5rem_1.3fr_16rem_auto]">
                     <span className="display-xl text-6xl text-sun" aria-hidden>{String(i + 1).padStart(2, "0")}</span>
                     <div>
                       <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-char/80">{c.kind}</p>
                       <h2 className="display-lg mt-1 text-4xl">{s.title}</h2>
                       <p className="mt-2 max-w-xl text-lg">{s.summary}</p>
                     </div>
-                    <div className="relative hidden aspect-[4/3] overflow-hidden rounded-2xl border-4 border-char md:block"><Image src={serviceImage(s.slug)} alt="" fill sizes="192px" className="object-cover transition-transform duration-500 hover:scale-110" /></div>
+                    <div className="relative hidden aspect-[4/3] overflow-hidden rounded-2xl border-4 border-char md:block"><Image src={serviceImage(s.slug)} alt="" fill sizes="256px" className="object-cover transition-transform duration-500 hover:scale-110" /></div>
                     <div className="md:justify-self-end"><Pill href={c.href} variant={s.cta === "booking" ? "orange" : "dark"}>{s.ctaLabel}</Pill></div>
                   </div>
                 </Reveal>

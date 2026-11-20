@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHero, Pill, PreviewBanner } from "@/components/Bits";
+import { PageHero, Pill, PreviewBanner, Stars } from "@/components/Bits";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { getTestimonials } from "@/lib/data";
 import { BUSINESS } from "@/lib/content";
@@ -26,7 +26,7 @@ export default async function Testimonials() {
             {items.map((t) => (
               <StaggerItem key={t.id}>
                 <figure className="break-inside-avoid rounded-[1.6rem] border-4 border-char bg-white p-6">
-                  {t.featured && <p className="mb-3 inline-block rounded-full bg-gold px-3 py-1 text-xs font-black uppercase">Featured</p>}
+                  <Stars rating={t.rating} />
                   <blockquote className="text-lg leading-relaxed">“{t.body}”</blockquote>
                   <figcaption className="mt-4 font-extrabold">{t.authorName}{t.visitedLocation ? `, ${t.visitedLocation}` : ""}</figcaption>
                 </figure>

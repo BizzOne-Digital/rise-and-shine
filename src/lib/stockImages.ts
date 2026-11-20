@@ -67,6 +67,7 @@ const REAL_PHOTOS: Record<string, string> = {
   "lemon ricotta pancake": "/images/dishes/lemon-ricotta-pancake.jpg",
   "longanisa": "/images/dishes/longanisa.jpg",
   "sunrise steak": "/images/dishes/sunrise-steak.jpg",
+  "classic breakfast": "/images/dishes/classic-breakfast.jpg",
   "fried pork belly": "/images/dishes/fried-pork-belly.jpg",
   "grilled chicken benedict": "/images/dishes/grilled-chicken-benedict.jpg",
   "crispy chicken wrap": "/images/dishes/crispy-chicken-wrap.jpg",
@@ -98,11 +99,11 @@ export function conceptFor(name: string): string | null {
 }
 
 export const SERVICE_IMG: Record<string, string> = {
-  "breakfast-brunch": IMG.benedict,
-  reservations: IMG.interior,
-  catering: IMG.catering,
+  "breakfast-brunch": "/images/dishes/philly-steak-benedict.jpg",
+  reservations: "/images/restaurant/dining-room.jpg",
+  catering: "/images/dishes/catering-spread.jpg", // collage of the client's tapa, tocino, longanisa and benedict photos
   "custom-orders": IMG.chef,
-  "groups-events": IMG.family,
+  "groups-events": "/images/restaurant/group-gathering.jpg",
 };
 export const serviceImage = (slug: string) => SERVICE_IMG[slug] ?? IMG.catering;
 

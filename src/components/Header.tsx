@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Logo } from "./Logo";
 
 const Arrow = ({ className = "" }: { className?: string }) => (
@@ -32,11 +32,17 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => setOpen(false), [pathname]);
+  // Closing with the Close button / Escape puts the page back where it was. Following a link must NOT restore the old scroll
+  // position, otherwise it overrides the destination (for example the #contact-us section).
+  const restoreScroll = useRef(true);
+  const followLink = () => { restoreScroll.current = false; setOpen(false); };
+
+  useEffect(() => { restoreScroll.current = false; setOpen(false); }, [pathname]);
   // Lock the page behind the open mobile menu. "overflow: hidden" alone is ignored by iOS Safari, so the body is pinned
-  // in place (and the scroll position restored on close). The header is fixed, so the Close button always stays on screen.
+  // in place. The header is fixed, so the Close button always stays on screen.
   useEffect(() => {
     if (!open) return;
+    restoreScroll.current = true;
     const y = window.scrollY;
     const s = document.body.style;
     const prev = { position: s.position, top: s.top, left: s.left, right: s.right, width: s.width };
@@ -46,7 +52,7 @@ export function Header() {
     return () => {
       window.removeEventListener("keydown", onKey);
       s.position = prev.position; s.top = prev.top; s.left = prev.left; s.right = prev.right; s.width = prev.width;
-      window.scrollTo({ top: y, behavior: "instant" as ScrollBehavior });
+      if (restoreScroll.current) window.scrollTo({ top: y, behavior: "instant" as ScrollBehavior });
     };
   }, [open]);
 
@@ -93,13 +99,13 @@ export function Header() {
               <ul>
                 {[{ href: "/", label: "Home" }, ...ALL].map((n, i) => (
                   <motion.li key={n.href} initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.12 + i * 0.05 }}>
-                    <Link href={n.href} className="block border-b border-white/25 py-4 font-nav text-lg font-bold uppercase tracking-wide">{n.label}</Link>
+                    <Link href={n.href} onClick={followLink} className="block border-b border-white/25 py-4 font-nav text-lg font-bold uppercase tracking-wide">{n.label}</Link>
                   </motion.li>
                 ))}
               </ul>
               <div className="mt-8 flex flex-col gap-3">
-                <Link href="/book" className="btn-press rounded-md bg-char py-4 text-center font-serif2 text-lg font-semibold text-cream">Let’s do breakfast</Link>
-                <Link href="/contact#contact-us" className="btn-press rounded-md border-2 border-white py-4 text-center font-serif2 text-lg font-semibold">Contact us</Link>
+                <Link href="/book" onClick={followLink} className="btn-press rounded-md bg-char py-4 text-center font-serif2 text-lg font-semibold text-cream">Let’s do breakfast</Link>
+                <Link href="/contact#contact-us" onClick={followLink} className="btn-press rounded-md border-2 border-white py-4 text-center font-serif2 text-lg font-semibold">Contact us</Link>
               </div>
             </nav>
           </motion.div>

@@ -51,14 +51,16 @@ export function SubmitButton({ pending, children, className = "" }: { pending: b
 
 /** Wraps a server action with pending state and accessible success/error feedback. */
 export function ActionForm({
-  action, children, submitLabel, className = "", disabledReason, resetOnSuccess = true,
+  action, children, submitLabel, className = "", disabledReason, resetOnSuccess = true, precheck,
 }: {
   action: Action; children: (s: State) => ReactNode; submitLabel: string; className?: string; disabledReason?: string; resetOnSuccess?: boolean;
+  /** Runs in the browser before sending; return a state with errors to stop the submit. */
+  precheck?: (fd: FormData) => State | null;
 }) {
   const { state, pending, onSubmit, ref } = useServerAction<State>(action, {});
 
   return (
-    <form ref={ref} onSubmit={(e) => onSubmit(e, (s, form) => { if (s.ok && resetOnSuccess) form.reset(); })} noValidate className={`relative space-y-4 ${className}`}>
+    <form ref={ref} onSubmit={(e) => onSubmit(e, (s, form) => { if (s.ok && resetOnSuccess) form.reset(); }, precheck)} noValidate className={`relative space-y-4 ${className}`}>
       {disabledReason && <p role="alert" className="rounded-xl border-2 border-gold bg-gold/20 p-4 font-bold">{disabledReason}</p>}
       <fieldset disabled={Boolean(disabledReason) || pending} className="space-y-4">
         {children(state)}

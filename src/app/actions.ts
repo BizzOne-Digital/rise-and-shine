@@ -113,7 +113,7 @@ export async function submitApplication(_prev: FormState, fd: FormData): Promise
   let fileName = "";
   if (file && typeof file === "object" && "arrayBuffer" in file) {
     fileName = String((file as File).name || "resume").replace(/[^\w.\- ]+/g, "_").slice(0, 120);
-    bytes = new Uint8Array(await (file as File).arrayBuffer());
+    try { bytes = new Uint8Array(await (file as File).arrayBuffer()); } catch { return { error: "We could not read your resume. Please try again with a PDF or Word file." }; }
   }
   const resumeProblem = checkResume(fileName, bytes);
   if (resumeProblem) errs.resume = resumeProblem;

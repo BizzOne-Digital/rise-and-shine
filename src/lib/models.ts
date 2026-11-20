@@ -116,6 +116,7 @@ export const Testimonial = model("Testimonial", new Schema({
   source: { type: String, enum: ["website", "admin"], default: "website" }, // never labelled as Google
   status: { type: String, enum: ["pending", "approved", "rejected"], default: "pending", index: true },
   featured: { type: Boolean, default: false },
+  rating: { type: Number, min: 1, max: 5, default: 5 },
   moderationNote: { type: String, default: "" }, // private
   contactEmail: { type: String, default: "" }, // private
   dedupeKey: { type: String, index: true },

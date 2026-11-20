@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { BUSINESS, formatPhone, gmailComposeUrl, mapsDirectionsUrl, telHref } from "@/lib/content";
+import { BUSINESS, formatPhone, mapsDirectionsUrl, telHref } from "@/lib/content";
+import { EmailLink } from "./EmailLink";
 import type { PubLocation } from "@/lib/data";
 import { Logo } from "./Logo";
 import { IconFacebook, IconInstagram, IconMail, IconTikTok } from "./Icons";
@@ -38,9 +39,9 @@ export function Footer({ locations }: { locations: PubLocation[] }) {
             ))}
           </ul>
           <p className="mt-4">
-            <a href={gmailComposeUrl()} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[40px] items-center gap-3 hover:text-gold">
-              <IconMail size={22} className="shrink-0 text-gold" /><span className="lowercase">{BUSINESS.email}</span><span className="sr-only"> (opens Gmail in a new tab)</span>
-            </a>
+            <EmailLink className="inline-flex min-h-[40px] items-center gap-3 hover:text-gold">
+              <IconMail size={22} className="shrink-0 text-gold" /><span className="lowercase">{BUSINESS.email}</span><span className="sr-only"> (opens your email)</span>
+            </EmailLink>
           </p>
           <ul className="mt-3 flex flex-wrap gap-3">
             {[["Instagram", BUSINESS.social.instagram, IconInstagram], ["Facebook", BUSINESS.social.facebook, IconFacebook], ["TikTok", BUSINESS.social.tiktok, IconTikTok]].map(([n, u, Icon]) => {

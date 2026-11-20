@@ -14,7 +14,7 @@ export default async function Book({ searchParams }: { searchParams: Promise<{ l
   return (
     <>
       {source === "preview" && <PreviewBanner />}
-      <PageHero image={{ src: "/images/restaurant/dining-room-chalkboard.jpg", alt: "The Rise N’ Shine dining room with the chalkboard wall and coffee bar", illustrative: false }} eyebrow="Booking request" title={<>Save us a <span className="text-gold">spot?</span></>}>
+      <PageHero image={{ src: "/images/restaurant/dining-room-chalkboard.jpg", alt: "The Rise N’ Shine dining room with the chalkboard wall and coffee bar", illustrative: false, landscape: true }} eyebrow="Booking request" title={<>Save us a <span className="text-gold">spot?</span></>}>
         <p>Families and groups are welcome. We take reservations on weekdays only (Monday to Friday), not on weekends. Tell us when you would like to come and we will confirm.</p>
       </PageHero>
       <section className="mx-auto max-w-3xl px-4 py-10 sm:py-16 sm:px-6">

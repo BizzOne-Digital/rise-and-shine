@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { submitApplication, submitBooking, submitContact } from "@/app/actions";
-import { ActionForm, Field, describedBy, inputCls } from "./FormKit";
+import { ActionForm, Field, describedBy, inputCls, type State } from "./FormKit";
 import { formatTime12, hoursFor, slotsFor, todayEdmonton, type DayHours, type HolidayOverride, type BookingRules } from "@/lib/hours";
 
 export type FormLocation = { slug: string; name: string; weekly: DayHours[]; overrides: HolidayOverride[]; rules: BookingRules; acceptsBookings: boolean };
@@ -88,9 +88,20 @@ export function ContactForm({ enabled, idp = "ct-" }: { enabled: boolean; idp?: 
   );
 }
 
+const RESUME_MAX = 3 * 1024 * 1024; // keep in sync with RESUME_MAX_BYTES in lib/validation.ts
+function checkResumeInBrowser(fd: FormData): State | null {
+  const f = fd.get("resume");
+  const bad = (m: string): State => ({ error: "Please fix the highlighted fields.", fieldErrors: { resume: m } });
+  if (!(f instanceof File) || f.size === 0) return bad("Please attach your resume");
+  const ext = f.name.toLowerCase().split(".").pop() ?? "";
+  if (!["pdf", "doc", "docx"].includes(ext)) return bad("Please attach your resume as a PDF or Word file (.pdf, .doc or .docx)");
+  if (f.size > RESUME_MAX) return bad("Your resume must be 3 MB or smaller. Please attach a smaller file.");
+  return null;
+}
+
 export function WorkWithUsForm({ enabled, idp = "wk-" }: { enabled: boolean; idp?: string }) {
   return (
-    <ActionForm action={submitApplication} submitLabel="Submit" disabledReason={enabled ? undefined : DB_MSG} resetOnSuccess>
+    <ActionForm action={submitApplication} submitLabel="Submit" disabledReason={enabled ? undefined : DB_MSG} resetOnSuccess precheck={checkResumeInBrowser}>
       {(s) => {
         const e = s.fieldErrors ?? {};
         return (

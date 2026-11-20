@@ -6,7 +6,8 @@ import { Pill } from "@/components/Bits";
 import { LocationCards } from "@/components/LocationCards";
 import { Reveal } from "@/components/Motion";
 import { getLocations, getSettings } from "@/lib/data";
-import { BUSINESS, gmailComposeUrl } from "@/lib/content";
+import { BUSINESS } from "@/lib/content";
+import { EmailLink } from "@/components/EmailLink";
 import { env } from "@/lib/env";
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default async function Contact() {
   return (
     <>
       {source === "preview" && <PreviewBanner />}
-      <PageHero image={{ src: "/images/restaurant/sign-wall-closeup.jpg", alt: "The Rise N’ Shine Breakfast Place sign above the yellow booths", illustrative: false }} eyebrow="Contact us" title={<>Come <span className="text-gold">hungry.</span></>}>
+      <PageHero image={{ src: "/images/restaurant/sign-wall-closeup.jpg", alt: "The Rise N’ Shine Breakfast Place sign above the yellow booths", illustrative: false, landscape: true }} eyebrow="Contact us" title={<>Come <span className="text-gold">hungry.</span></>}>
         <p>Serving up your favorite morning comforts across two Calgary locations. Reach out today to say hello or book a table.</p>
       </PageHero>
 
@@ -49,7 +50,7 @@ export default async function Contact() {
                 <IconMail size={30} className="mt-1 shrink-0 text-gold" />
                 <div>
                   <p className="text-sm font-extrabold uppercase tracking-wider text-gold">General inquiries</p>
-                  <a href={gmailComposeUrl()} target="_blank" rel="noopener noreferrer" className="text-xl font-bold lowercase underline decoration-gold/40 underline-offset-4 [overflow-wrap:anywhere] hover:text-gold hover:decoration-gold">{BUSINESS.email}<span className="sr-only"> (opens Gmail in a new tab)</span></a>
+                  <EmailLink className="text-xl font-bold lowercase underline decoration-gold/40 underline-offset-4 [overflow-wrap:anywhere] hover:text-gold hover:decoration-gold"><span>{BUSINESS.email}</span><span className="sr-only"> (opens your email)</span></EmailLink>
                 </div>
               </li>
               <li className="flex items-start gap-4">

@@ -19,7 +19,7 @@ export type PubItem = {
   overrides: { locationSlug: string; priceCents: number | null; available: boolean }[];
 };
 export type PubService = { id: string; slug: string; title: string; summary: string; cta: string; ctaLabel: string };
-export type PubTestimonial = { id: string; authorName: string; body: string; visitedLocation: string; featured: boolean };
+export type PubTestimonial = { id: string; authorName: string; body: string; visitedLocation: string; featured: boolean; rating: number };
 export type PubMember = { id: string; name: string; role: string; bio: string; imageUrl: string | null; imageAlt: string };
 export type PubSettings = { menuPdfUrl: string; hoursNote: string; bookingsEnabled: boolean };
 
@@ -112,8 +112,8 @@ export async function getTestimonials(limit = 60) {
   return withDb<PubTestimonial[]>(
     async () => {
       const rows = await M.Testimonial.find({ status: "approved" })
-        .select("authorName body visitedLocation featured").sort({ featured: -1, createdAt: -1 }).limit(limit).lean<Lean[]>();
-      return rows.map((t) => ({ id: String(t._id), authorName: t.authorName, body: t.body, visitedLocation: str(t.visitedLocation), featured: !!t.featured }));
+        .select("authorName body visitedLocation featured rating").sort({ featured: -1, createdAt: -1 }).limit(limit).lean<Lean[]>();
+      return rows.map((t) => ({ id: String(t._id), authorName: t.authorName, body: t.body, visitedLocation: str(t.visitedLocation), featured: !!t.featured, rating: Math.min(5, Math.max(1, Number(t.rating) || 5)) }));
     },
     () => [],
   );
