@@ -26,7 +26,8 @@
     "create-admin": "tsx scripts/create-admin.ts",
     "sync-client-changes": "tsx scripts/sync-client-changes.ts",
     "sync-menu-from-pdf": "tsx scripts/sync-menu-from-pdf.ts",
-    "test-smtp": "tsx scripts/test-smtp.ts"
+    "test-smtp": "tsx scripts/test-smtp.ts",
+    "add-testimonials": "tsx scripts/add-testimonials.ts"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
