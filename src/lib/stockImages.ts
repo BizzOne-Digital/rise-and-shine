@@ -102,7 +102,7 @@ export const SERVICE_IMG: Record<string, string> = {
   "breakfast-brunch": "/images/dishes/philly-steak-benedict.jpg",
   reservations: "/images/restaurant/dining-room.jpg",
   catering: "/images/dishes/catering-spread.jpg", // collage of the client's tapa, tocino, longanisa and benedict photos
-  "custom-orders": IMG.chef,
+  "custom-orders": "/images/dishes/custom-order-spread.jpg",
   "groups-events": "/images/restaurant/group-gathering.jpg",
 };
 export const serviceImage = (slug: string) => SERVICE_IMG[slug] ?? IMG.catering;
