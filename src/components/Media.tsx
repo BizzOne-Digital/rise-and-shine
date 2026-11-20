@@ -9,9 +9,9 @@ const ease = [0.2, 0.7, 0.2, 1] as const;
 
 /** Image that is revealed with a clip-path wipe when it enters view and drifts slightly with scroll (capable devices only). */
 export function RevealImg({
-  src, alt, sizes, className = "", rounded = "rounded-[2rem]", shape, speed = 40, priority = false, illustrative = true, tilt = 0, position = "center",
+  src, alt, sizes, className = "", rounded = "rounded-[2rem]", shape, speed = 40, priority = false, illustrative = true, tilt = 0, position = "center", zoom = 1.12,
 }: {
-  src: string; alt: string; sizes: string; className?: string; rounded?: string; shape?: "arch"; speed?: number; priority?: boolean; illustrative?: boolean; tilt?: number; position?: string;
+  src: string; alt: string; sizes: string; className?: string; rounded?: string; shape?: "arch"; speed?: number; priority?: boolean; illustrative?: boolean; tilt?: number; position?: string; zoom?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const parallax = useParallaxEnabled();
@@ -22,7 +22,7 @@ export function RevealImg({
       initial={{ clipPath: "inset(12% 12% 12% 12% round 2rem)", opacity: 0 }} whileInView={{ clipPath: "inset(0% 0% 0% 0% round 0rem)", opacity: 1 }}
       viewport={{ once: true, margin: "0px 0px -10% 0px" }} transition={{ duration: 1.1, ease }}>
       <div className={`group relative h-full w-full overflow-hidden border-4 border-char bg-cream-dark ${shape === "arch" ? "rounded-t-[999px] rounded-b-[2rem]" : rounded}`}>
-        <motion.div style={{ y, scale: 1.12 }} className="absolute inset-0">
+        <motion.div style={{ y, scale: zoom }} className="absolute inset-0">
           <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="zoom-img object-cover" style={{ objectPosition: position }} />
         </motion.div>
         {illustrative && <span className="absolute bottom-3 left-3 rounded-full bg-char/75 px-3 py-1 text-[0.7rem] font-bold uppercase tracking-wider text-cream">Illustrative image</span>}

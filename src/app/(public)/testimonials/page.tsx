@@ -12,7 +12,7 @@ export default async function Testimonials() {
   return (
     <>
       {source === "preview" && <PreviewBanner />}
-      <PageHero image={{ src: "/images/restaurant/latte-orange-juice.jpg", alt: "A Rise N’ Shine latte mug and a glass of orange juice on a sunlit wooden table", illustrative: false }} eyebrow="Testimonials" title={<>Your words, <span className="text-gold">our fuel.</span></>}>
+      <PageHero image={{ src: "/images/restaurant/hero-mug-landscape.jpg", alt: "A Rise N’ Shine latte mug and a glass of orange juice beside ube French toast and beef tapa on a sunlit wooden table", illustrative: false, landscape: true }} eyebrow="Testimonials" title={<>Your words, <span className="text-gold">our fuel.</span></>}>
         <p>Feedback shared with us directly, shown only after our team has reviewed it.</p>
       </PageHero>
       <section className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:py-20 sm:px-6">

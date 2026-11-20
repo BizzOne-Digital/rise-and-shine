@@ -17,7 +17,7 @@ export function PageHero({ eyebrow, title, children, tone = "orange", image }: {
         </div>
         {image && (
           <div className={`relative mx-auto hidden w-full lg:block ${image.landscape ? "max-w-lg" : "max-w-sm"}`}>
-            <RevealImg src={image.src} alt={image.alt} sizes="(min-width:1024px) 34vw, 0px" shape={image.landscape ? undefined : "arch"} className={`w-full ${image.landscape ? "aspect-[4/3]" : "aspect-[4/5]"}`} speed={image.landscape ? 12 : 30} illustrative={image.illustrative ?? true} />
+            <RevealImg src={image.src} alt={image.alt} sizes="(min-width:1024px) 34vw, 0px" shape={image.landscape ? undefined : "arch"} className={`w-full ${image.landscape ? "aspect-[4/3]" : "aspect-[4/5]"}`} speed={image.landscape ? 0 : 30} zoom={image.landscape ? 1.02 : 1.12} illustrative={image.illustrative ?? true} />
             <div className="bob absolute -left-6 bottom-10 grid h-24 w-24 place-items-center rounded-full bg-gold p-2 text-center text-[0.68rem] font-black uppercase leading-tight text-char shadow-lg [--r:-8deg]">Fresh<br />every<br />morning</div>
           </div>
         )}

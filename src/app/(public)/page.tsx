@@ -151,7 +151,7 @@ export default async function Home() {
       <section className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-10 sm:py-16 sm:py-24 lg:py-28 sm:px-6 lg:grid-cols-[1.05fr_1fr]" aria-labelledby="story">
         <div className="relative mx-auto grid w-full max-w-xl grid-cols-5 grid-rows-6 gap-4">
           <RevealImg src="/images/restaurant/dining-room.jpg" alt="The dining room at Rise N’ Shine with yellow booths, a wood feature wall and the coffee bar" illustrative={false} sizes="(min-width:1024px) 30vw, 70vw" className="col-span-3 row-span-5 aspect-[3/4]" speed={30} />
-          <RevealImg src="/images/restaurant/latte-orange-juice.jpg" alt="A Rise N’ Shine latte mug and a glass of orange juice on a sunlit wooden table" illustrative={false} position="50% 8%" sizes="(min-width:1024px) 20vw, 40vw" className="col-span-2 col-start-4 row-span-3 row-start-2 aspect-square" speed={-20} />
+          <RevealImg src="/images/restaurant/hero-mug-portrait.jpg" alt="A Rise N’ Shine latte mug and a glass of orange juice on a sunlit wooden table" illustrative={false} position="50% 8%" sizes="(min-width:1024px) 20vw, 40vw" className="col-span-2 col-start-4 row-span-3 row-start-2 aspect-square" speed={-20} />
           <div className="bob col-span-2 col-start-4 row-start-5 grid place-items-center self-center rounded-[1.4rem] bg-sun p-4 text-center font-cond text-2xl font-extrabold uppercase leading-none text-white [--r:3deg]">Serving<br />Calgary<br />since 2020</div>
         </div>
         <div>
