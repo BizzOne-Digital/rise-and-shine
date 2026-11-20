@@ -7,7 +7,7 @@ import { ALabel, AForm, Check, aInput } from "@/components/admin/AdminKit";
 import { ImageField } from "@/components/admin/ImageField";
 import { deleteProduct, saveProduct } from "../../actions";
 
-export const metadata = { title: "Products" };
+export const metadata = { title: "Menu items" };
 type C = { _id: string; name: string };
 type I = { _id: string; category: string; name: string; description: string; priceCents: number | null; image?: string; signature: boolean; available: boolean; published: boolean };
 
@@ -36,8 +36,8 @@ export default async function Products() {
   const C = plain<C[]>(cats), I = plain<I[]>(items);
   return (
     <div className="max-w-5xl space-y-6">
-      <h1 className="display-lg text-4xl">Products</h1>
-      <p className="text-sm">Add, edit or delete menu products. Products without an image show a placeholder picture on the website.</p>
+      <h1 className="display-lg text-4xl">Menu items</h1>
+      <p className="text-sm">Add, edit or delete dishes. A dish with no uploaded image uses the website photo for that dish, or a placeholder.</p>
       {C.length === 0 ? (
         <p className="rounded-2xl bg-white p-8 text-center font-bold">No categories found. Run <code>npm run seed</code> first.</p>
       ) : (

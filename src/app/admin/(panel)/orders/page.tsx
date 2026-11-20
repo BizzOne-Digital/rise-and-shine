@@ -7,7 +7,7 @@ import { AForm, aBtn, aInput } from "@/components/admin/AdminKit";
 import { Pager } from "@/components/admin/Pager";
 import { deleteOrder } from "../../actions";
 
-export const metadata = { title: "Orders" };
+export const metadata = { title: "Booking requests" };
 type Row = { _id: string; name: string; email: string; phone: string; location: string; date: string; time: string; partySize: number; notes: string; createdAt: string };
 const LOCATION: Record<string, string> = { "forest-lawn": "Forest Lawn", "the-district": "The District" };
 
@@ -25,14 +25,14 @@ export default async function Orders({ searchParams }: { searchParams: Promise<{
   const list = plain<Row[]>(rows);
   return (
     <div className="max-w-4xl">
-      <h1 className="display-lg text-4xl">Orders</h1>
+      <h1 className="display-lg text-4xl">Booking requests</h1>
       <p className="mt-1 text-sm">Table booking requests sent from the website. You can view and delete them.</p>
       <form className="mt-4 flex gap-2">
         <label className="sr-only" htmlFor="q">Search name, email or phone</label>
         <input id="q" name="q" defaultValue={sp.q} placeholder="Search name, email or phone" className={aInput} />
         <button className={`${aBtn} bg-char text-cream`}>Search</button>
       </form>
-      {list.length === 0 ? <p className="mt-6 rounded-2xl bg-white p-8 text-center font-bold">No orders yet.</p> : (
+      {list.length === 0 ? <p className="mt-6 rounded-2xl bg-white p-8 text-center font-bold">No booking requests yet.</p> : (
         <ul className="mt-4 space-y-3">
           {list.map((o) => (
             <li key={o._id} className="rounded-2xl border-2 border-char bg-white p-4 sm:p-5">
@@ -50,7 +50,7 @@ export default async function Orders({ searchParams }: { searchParams: Promise<{
                   <div className="sm:col-span-2"><dt className="font-extrabold">Notes</dt><dd className="whitespace-pre-wrap break-words">{o.notes || "None"}</dd></div>
                 </dl>
               </details>
-              <div className="mt-3"><AForm action={deleteOrder} submit="Delete order" variant="danger" inline confirm="Delete this order permanently?"><input type="hidden" name="id" value={o._id} /></AForm></div>
+              <div className="mt-3"><AForm action={deleteOrder} submit="Delete request" variant="danger" inline confirm="Delete this booking request permanently?"><input type="hidden" name="id" value={o._id} /></AForm></div>
             </li>
           ))}
         </ul>

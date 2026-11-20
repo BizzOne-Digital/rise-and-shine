@@ -5,7 +5,7 @@ import { z } from "zod";
 import mongoose from "mongoose";
 import { requireAdmin, UnauthorizedError, type AdminSession } from "@/lib/auth";
 import { connectDB } from "@/lib/db";
-import { BookingRequest, MenuCategory, MenuItem } from "@/lib/models";
+import { BookingRequest, ContactMessage, JobApplication, MenuCategory, MenuItem } from "@/lib/models";
 import { parsePriceToCents } from "@/lib/money";
 import { deleteUploadByUrl, parseUploadUrl } from "@/lib/uploads";
 
@@ -78,12 +78,31 @@ export async function deleteProduct(_p: State, fd: FormData): Promise<State> {
   });
 }
 
-// ---------------- Orders (booking requests): view and delete only ----------------
+// ---------------- Messages and job applications: view and delete only ----------------
+export async function deleteMessage(_p: State, fd: FormData): Promise<State> {
+  return run(async () => {
+    const id = objectId.safeParse(f(fd, "id"));
+    if (!id.success) return bad("Invalid id.");
+    const r = await ContactMessage.deleteOne({ _id: id.data });
+    return r.deletedCount ? ok("Message deleted.") : bad("Message not found.");
+  });
+}
+
+export async function deleteApplication(_p: State, fd: FormData): Promise<State> {
+  return run(async () => {
+    const id = objectId.safeParse(f(fd, "id"));
+    if (!id.success) return bad("Invalid id.");
+    const r = await JobApplication.deleteOne({ _id: id.data });
+    return r.deletedCount ? ok("Application deleted.") : bad("Application not found.");
+  });
+}
+
+// ---------------- Booking requests: view and delete only ----------------
 export async function deleteOrder(_p: State, fd: FormData): Promise<State> {
   return run(async () => {
     const id = objectId.safeParse(f(fd, "id"));
     if (!id.success) return bad("Invalid id.");
     const r = await BookingRequest.deleteOne({ _id: id.data });
-    return r.deletedCount ? ok("Order deleted.") : bad("Order not found.");
+    return r.deletedCount ? ok("Booking request deleted.") : bad("Booking request not found.");
   });
 }

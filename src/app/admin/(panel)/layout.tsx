@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { requirePageAdmin } from "@/lib/auth";
 import { connectDB } from "@/lib/db";
-import { BookingRequest } from "@/lib/models";
+import { BookingRequest, ContactMessage, JobApplication } from "@/lib/models";
 import { Logo } from "@/components/Logo";
 import { logout } from "../login/actions";
 
-const NAV = [["/admin/products", "Products"], ["/admin/orders", "Orders"]] as const;
+const NAV = [["/admin/products", "Menu items"], ["/admin/orders", "Booking requests"], ["/admin/messages", "Messages"], ["/admin/applications", "Applications"]] as const;
 
 export default async function PanelLayout({ children }: { children: React.ReactNode }) {
   const me = await requirePageAdmin();
   await connectDB();
-  const orders = await BookingRequest.countDocuments({});
+  const [orders, messages, applications] = await Promise.all([BookingRequest.countDocuments({}), ContactMessage.countDocuments({}), JobApplication.countDocuments({})]);
+  const counts: Record<string, number> = { "/admin/orders": orders, "/admin/messages": messages, "/admin/applications": applications };
   return (
     <div className="lg:grid lg:grid-cols-[16rem_1fr]">
       <aside className="on-dark bg-char text-cream lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto">
@@ -18,7 +19,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
         <nav aria-label="Admin" className="flex gap-1 overflow-x-auto px-3 pb-3 lg:block lg:space-y-1 lg:overflow-visible">
           {NAV.map(([h, l]) => (
             <Link key={h} href={h} className="flex min-h-[44px] shrink-0 items-center justify-between gap-3 rounded-lg px-3 text-sm font-bold hover:bg-cream/10">
-              {l}{h === "/admin/orders" && orders ? <span className="rounded-full bg-gold px-2 py-0.5 text-xs font-black text-char" aria-label={`${orders} orders`}>{orders}</span> : null}
+              {l}{counts[h] ? <span className="rounded-full bg-gold px-2 py-0.5 text-xs font-black text-char" aria-label={`${counts[h]} total`}>{counts[h]}</span> : null}
             </Link>
           ))}
           <Link href="/" target="_blank" className="flex min-h-[44px] shrink-0 items-center rounded-lg px-3 text-sm font-bold text-gold hover:bg-cream/10">View site</Link>

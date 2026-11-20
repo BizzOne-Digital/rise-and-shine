@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Reveal } from "./Motion";
 import { SunArcs } from "./Art";
 import { RevealImg } from "./Media";
+import { EmailLink } from "./EmailLink";
 
 export function PageHero({ eyebrow, title, children, tone = "orange", image }: { eyebrow: string; title: ReactNode; children?: ReactNode; tone?: "orange" | "dark" | "gold"; image?: { src: string; alt: string; illustrative?: boolean; landscape?: boolean } }) {
   const cls = tone === "orange" ? "bg-sun text-cream on-orange" : tone === "dark" ? "bg-char text-cream on-dark" : "bg-gold text-char";
@@ -43,7 +44,12 @@ export function Pill({ href, children, variant = "orange", external = false }: {
     outline: "border-2 border-current",
   }[variant];
   const cls = `btn-press inline-flex min-h-[52px] items-center rounded-full px-7 text-lg font-extrabold transition-transform hover:-translate-y-0.5 ${v}`;
-  if (href.startsWith("mailto:") || href.startsWith("tel:")) return <a href={href} className={cls}>{children}</a>;
+  if (href.startsWith("mailto:")) {
+    // Phones open their mail app; on a desktop browser this opens Gmail's compose window (a plain mailto: often does nothing there).
+    const u = new URL(href);
+    return <EmailLink email={decodeURIComponent(u.pathname)} subject={u.searchParams.get("subject") ?? ""} className={cls}>{children}</EmailLink>;
+  }
+  if (href.startsWith("tel:")) return <a href={href} className={cls}>{children}</a>;
   return external
     ? <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>{children}<span className="sr-only"> (opens in a new tab)</span></a>
     : <Link href={href} className={cls}>{children}</Link>;

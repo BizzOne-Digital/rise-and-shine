@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero, PreviewBanner } from "@/components/Bits";
+import { EmailLink } from "@/components/EmailLink";
 import { BookingForm } from "@/components/Forms";
 import { Reveal } from "@/components/Motion";
 import { getLocations, getSettings } from "@/lib/data";
@@ -21,7 +22,7 @@ export default async function Book({ searchParams }: { searchParams: Promise<{ l
         <Reveal><div className="rounded-[2rem] border-4 border-char bg-white p-6 shadow-[8px_8px_0_#211A16] sm:p-10">
           <BookingForm locations={formLocations} enabled={env.dbConfigured && settings.bookingsEnabled} defaultLocation={sp.location} />
         </div></Reveal>
-        <p className="mt-6 text-center text-base">Planning catering or a large event? <a className="font-extrabold underline" href="mailto:rnsbreakfast@gmail.com?subject=Catering%20inquiry">Email us instead.</a></p>
+        <p className="mt-6 text-center text-base">Planning catering or a large event? <EmailLink className="font-extrabold underline" subject="Catering inquiry">Email us instead.</EmailLink></p>
       </section>
     </>
   );
