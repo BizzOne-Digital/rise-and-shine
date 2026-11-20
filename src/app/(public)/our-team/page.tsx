@@ -1,4 +1,3 @@
-import { IMG } from "@/lib/stockImages";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero, Pill, PreviewBanner } from "@/components/Bits";
@@ -13,7 +12,7 @@ export default async function Team() {
   return (
     <>
       {source === "preview" && <PreviewBanner />}
-      <PageHero image={{ src: IMG.chef, alt: "Illustrative image of a cook finishing a breakfast plate" }} eyebrow="Our team" title={<>The people behind the <span className="text-gold">plates.</span></>}>
+      <PageHero image={{ src: "/images/restaurant/chef-philly-benedict.jpg", alt: "A cook finishing a Philly steak benedict with fresh parsley", illustrative: false }} eyebrow="Our team" title={<>The people behind the <span className="text-gold">plates.</span></>}>
         <p>The cooks, servers and hosts who make mornings at Rise N’ Shine feel like home.</p>
       </PageHero>
       <section className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:py-20 sm:px-6">
